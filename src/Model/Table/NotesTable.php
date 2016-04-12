@@ -29,6 +29,26 @@ class NotesTable extends Table
     ];
 
     /**
+     * Shared option private value
+     */
+    const SHARED_PRIVATE = 'private';
+
+    /**
+     * Shared option public value
+     */
+    const SHARED_PUBLIC = 'public';
+
+    /**
+     * Notes shared options
+     *
+     * @var array
+     */
+    protected $_shared = [
+        'private',
+        'public'
+    ];
+
+    /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
@@ -117,5 +137,39 @@ class NotesTable extends Table
         }, $this->_types));
 
         return $result;
+    }
+
+    /**
+     * Returns Notes shared options.
+     *
+     * @return array
+     */
+    public function getShared()
+    {
+        $result = array_combine($this->_shared, array_map(function ($v) {
+            return Inflector::humanize($v);
+        }, $this->_shared));
+
+        return $result;
+    }
+
+    /**
+     * Return public shared option.
+     *
+     * @return string
+     */
+    public function getPublicShared()
+    {
+        return static::SHARED_PUBLIC;
+    }
+
+    /**
+     * Return private shared option.
+     *
+     * @return string
+     */
+    public function getPrivateShared()
+    {
+        return static::SHARED_PRIVATE;
     }
 }
