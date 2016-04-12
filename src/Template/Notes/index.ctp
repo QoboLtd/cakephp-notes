@@ -12,11 +12,11 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id'); ?></th>
-                    <th><?= $this->Paginator->sort('title'); ?></th>
                     <th><?= $this->Paginator->sort('type'); ?></th>
+                    <th><?= $this->Paginator->sort('shared'); ?></th>
+                    <th><?= $this->Paginator->sort('title'); ?></th>
                     <th><?= $this->Paginator->sort('model'); ?></th>
                     <th><?= $this->Paginator->sort('primary_key'); ?></th>
-                    <th><?= $this->Paginator->sort('shared'); ?></th>
                     <th class="actions"><?= __('Actions'); ?></th>
                 </tr>
             </thead>
@@ -24,11 +24,11 @@
                 <?php foreach ($notes as $note): ?>
                 <tr>
                     <td><?= h($note->id) ?></td>
+                    <td><?= h($types[$note->type]) ?></td>
+                    <td><?= h($shared[$note->shared]) ?></td>
                     <td><?= h($note->title) ?></td>
-                    <td><?= h($note->type) ?></td>
                     <td><?= h($note->model) ?></td>
                     <td><?= h($note->primary_key) ?></td>
-                    <td><?= h($note->shared) ?></td>
                     <td class="actions">
                         <?= $this->Html->link('', ['action' => 'view', $note->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
                         <?= $this->Html->link('', ['action' => 'edit', $note->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>
