@@ -14,7 +14,6 @@
                     <th><?= $this->Paginator->sort('id'); ?></th>
                     <th><?= $this->Paginator->sort('title'); ?></th>
                     <th><?= $this->Paginator->sort('type'); ?></th>
-                    <th><?= $this->Paginator->sort('user_id'); ?></th>
                     <th><?= $this->Paginator->sort('model'); ?></th>
                     <th><?= $this->Paginator->sort('primary_key'); ?></th>
                     <th><?= $this->Paginator->sort('shared'); ?></th>
@@ -27,9 +26,6 @@
                     <td><?= h($note->id) ?></td>
                     <td><?= h($note->title) ?></td>
                     <td><?= h($note->type) ?></td>
-                    <td>
-                        <?= $note->has('user') ? $this->Html->link($note->user->id, ['controller' => 'Users', 'action' => 'view', $note->user->id]) : '' ?>
-                    </td>
                     <td><?= h($note->model) ?></td>
                     <td><?= h($note->primary_key) ?></td>
                     <td><?= h($note->shared) ?></td>
