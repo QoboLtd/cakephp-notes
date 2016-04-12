@@ -37,12 +37,6 @@ class NotesTable extends Table
             'joinType' => 'INNER',
             'className' => 'Notes.Users'
         ]);
-        $this->belongsToMany('Phinxlog', [
-            'foreignKey' => 'note_id',
-            'targetForeignKey' => 'phinxlog_id',
-            'joinTable' => 'notes_phinxlog',
-            'className' => 'Notes.Phinxlog'
-        ]);
     }
 
     /**
