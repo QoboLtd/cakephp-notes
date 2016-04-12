@@ -4,6 +4,7 @@ namespace Notes\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Utility\Inflector;
 use Cake\Validation\Validator;
 use Notes\Model\Entity\Note;
 
@@ -15,6 +16,17 @@ use Notes\Model\Entity\Note;
  */
 class NotesTable extends Table
 {
+    /**
+     * Notes types
+     *
+     * @var array
+     */
+    protected $_types = [
+        'yellow',
+        'blue',
+        'red',
+        'green'
+    ];
 
     /**
      * Initialize method
@@ -91,5 +103,19 @@ class NotesTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
+    }
+
+    /**
+     * Returns Notes types.
+     *
+     * @return array
+     */
+    public function getTypes()
+    {
+        $result = array_combine($this->_types, array_map(function ($v) {
+            return Inflector::humanize($v);
+        }, $this->_types));
+
+        return $result;
     }
 }
