@@ -1,6 +1,7 @@
 <?php
 namespace Notes\Controller;
 
+use Cake\Network\Exception\UnauthorizedException;
 use Notes\Controller\AppController;
 
 /**
@@ -43,6 +44,15 @@ class NotesController extends AppController
         $note = $this->Notes->get($id, [
             'contain' => ['Users']
         ]);
+
+        $sharedPrivate = $this->Notes->getPrivateShared();
+        /*
+        if note is private and current user is not the owner, through exception.
+         */
+        if ($note->shared === $sharedPrivate && $note->user_id !== $this->Auth->user('id')) {
+            throw new UnauthorizedException();
+        }
+
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
 
