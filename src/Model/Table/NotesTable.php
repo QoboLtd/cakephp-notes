@@ -34,8 +34,7 @@ class NotesTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
-            'className' => 'Notes.Users'
+            'className' => 'CakeDC/Users.Users'
         ]);
     }
 
