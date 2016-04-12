@@ -59,6 +59,10 @@ class NotesTable extends Table
             ->notEmpty('type');
 
         $validator
+            ->requirePresence('user_id', 'create')
+            ->notEmpty('user_id');
+
+        $validator
             ->allowEmpty('model');
 
         $validator
