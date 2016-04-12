@@ -50,7 +50,9 @@ class NotesController extends AppController
     {
         $note = $this->Notes->newEntity();
         if ($this->request->is('post')) {
-            $note = $this->Notes->patchEntity($note, $this->request->data);
+            $data = $this->request->data;
+            $data['user_id'] = $this->Auth->user('id');
+            $note = $this->Notes->patchEntity($note, $data);
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
                 return $this->redirect(['action' => 'index']);
