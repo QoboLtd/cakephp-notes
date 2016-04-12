@@ -18,6 +18,11 @@ class NotesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'finder' => [
+                'ownedBy' => ['user_id' => $this->Auth->user('id')]
+            ]
+        ];
         $notes = $this->paginate($this->Notes);
 
         $this->set(compact('notes'));
