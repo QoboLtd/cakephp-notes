@@ -41,7 +41,7 @@ class NotesController extends AppController
     public function view($id = null)
     {
         $note = $this->Notes->get($id, [
-            'contain' => []
+            'contain' => ['Users']
         ]);
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
