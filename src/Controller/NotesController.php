@@ -24,8 +24,10 @@ class NotesController extends AppController
             ]
         ];
         $notes = $this->paginate($this->Notes);
+        $types = $this->Notes->getTypes();
+        $shared = $this->Notes->getShared();
 
-        $this->set(compact('notes'));
+        $this->set(compact('notes', 'types', 'shared'));
         $this->set('_serialize', ['notes']);
     }
 
@@ -41,8 +43,10 @@ class NotesController extends AppController
         $note = $this->Notes->get($id, [
             'contain' => []
         ]);
+        $types = $this->Notes->getTypes();
+        $shared = $this->Notes->getShared();
 
-        $this->set('note', $note);
+        $this->set(compact('note', 'types', 'shared'));
         $this->set('_serialize', ['note']);
     }
 
@@ -65,7 +69,9 @@ class NotesController extends AppController
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('note'));
+        $types = $this->Notes->getTypes();
+        $shared = $this->Notes->getShared();
+        $this->set(compact('note', 'types', 'shared'));
         $this->set('_serialize', ['note']);
     }
 
@@ -90,7 +96,9 @@ class NotesController extends AppController
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('note'));
+        $types = $this->Notes->getTypes();
+        $shared = $this->Notes->getShared();
+        $this->set(compact('note', 'types', 'shared'));
         $this->set('_serialize', ['note']);
     }
 
