@@ -172,4 +172,15 @@ class NotesTable extends Table
     {
         return static::SHARED_PRIVATE;
     }
+
+    /**
+     * Finder method that returns records by owner.
+     * @param  Query  $query   Query object
+     * @param  array  $options Options
+     * @return Query
+     */
+    public function findOwnedBy(Query $query, array $options)
+    {
+        return $query->where(['user_id' => $options['user_id']]);
+    }
 }
