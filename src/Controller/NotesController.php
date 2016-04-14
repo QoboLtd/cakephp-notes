@@ -19,11 +19,14 @@ class NotesController extends AppController
     public function myNotes()
     {
         $notes = $this->Notes->find('all')
+            ->contain([
+                'Users'
+            ])
             ->where([
-                'user_id' => $this->Auth->user('id')
+                'Notes.user_id' => $this->Auth->user('id')
             ])
             ->order([
-                'modified' => 'DESC'
+                'Notes.modified' => 'DESC'
             ]);
 
         $notes = $this->paginate($notes);
