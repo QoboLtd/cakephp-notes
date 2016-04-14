@@ -42,14 +42,17 @@ class NotesController extends AppController
     public function index()
     {
         $notes = $this->Notes->find('all')
+            ->contain([
+                'Users'
+            ])
             ->where([
-                'user_id' => $this->Auth->user('id')
+                'Notes.user_id' => $this->Auth->user('id')
             ])
             ->orWhere([
-                'shared' => $this->Notes->getPublicShared()
+                'Notes.shared' => $this->Notes->getPublicShared()
             ])
             ->order([
-                'modified' => 'DESC'
+                'Notes.modified' => 'DESC'
             ]);
 
         $notes = $this->paginate($notes);

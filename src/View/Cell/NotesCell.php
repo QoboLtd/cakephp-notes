@@ -8,27 +8,30 @@ class NotesCell extends Cell
     /**
      * Pass record specific notes to the View, based on current user and visibility.
      *
-     * @param  string $model model name
-     * @param  string $recordId record id
+     * @param  string $relatedModel related model name
+     * @param  string $relatedId related record id
      * @return void
      */
-    public function recordNotes($model, $recordId)
+    public function recordNotes($relatedModel, $relatedId)
     {
         $currentUser = $this->request->session()->read('Auth.User');
         $this->loadModel('Notes.Notes');
         $notes = $this->Notes->find('all')
+            ->contain([
+                'Users'
+            ])
             ->where([
-                'user_id' => $currentUser['id']
+                'Notes.user_id' => $currentUser['id']
             ])
             ->orWhere([
-                'shared' => $this->Notes->getPublicShared()
+                'Notes.shared' => $this->Notes->getPublicShared()
             ])
             ->andWhere([
-                'model' => $model,
-                'primary_key' => $recordId
+                'Notes.related_model' => $relatedModel,
+                'Notes.related_id' => $relatedId
             ])
             ->order([
-                'modified' => 'DESC'
+                'Notes.modified' => 'DESC'
             ]);
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
