@@ -11,8 +11,8 @@ $colWidth = isset($rowItems) ? 12 / $rowItems : 12;
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <span class="glyphicon glyphicon-user" aria-hidden="true" title="<?= $this->request->session()->read('Auth.User.username') ?>"></span>
-            <strong><?= $note->title ?></strong>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <strong><?= $note->user->username ?></strong>
             <p><?= $note->content ?></p>
             <span class="actions">
                 <?php if ($this->request->session()->read('Auth.User.id') === $note->user_id) : ?>
