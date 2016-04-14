@@ -11,6 +11,28 @@ use Notes\Controller\AppController;
  */
 class NotesController extends AppController
 {
+    /**
+     * My notes method
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function myNotes()
+    {
+        $notes = $this->Notes->find('all')
+            ->where([
+                'user_id' => $this->Auth->user('id')
+            ])
+            ->order([
+                'modified' => 'DESC'
+            ]);
+
+        $notes = $this->paginate($notes);
+        $types = $this->Notes->getTypes();
+        $shared = $this->Notes->getShared();
+
+        $this->set(compact('notes', 'types', 'shared'));
+        $this->set('_serialize', ['notes']);
+    }
 
     /**
      * Index method
@@ -19,12 +41,18 @@ class NotesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'finder' => [
-                'ownedBy' => ['user_id' => $this->Auth->user('id')]
-            ]
-        ];
-        $notes = $this->paginate($this->Notes);
+        $notes = $this->Notes->find('all')
+            ->where([
+                'user_id' => $this->Auth->user('id')
+            ])
+            ->orWhere([
+                'shared' => $this->Notes->getPublicShared()
+            ])
+            ->order([
+                'modified' => 'DESC'
+            ]);
+
+        $notes = $this->paginate($notes);
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
 
@@ -47,7 +75,7 @@ class NotesController extends AppController
 
         $sharedPrivate = $this->Notes->getPrivateShared();
         /*
-        if note is private and current user is not the owner, through exception.
+        if note is private and current user is not the owner, throw exception.
          */
         if ($note->shared === $sharedPrivate && $note->user_id !== $this->Auth->user('id')) {
             throw new UnauthorizedException();
