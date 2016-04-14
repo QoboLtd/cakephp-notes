@@ -125,11 +125,19 @@ class NotesController extends AppController
         $note = $this->Notes->get($id, [
             'contain' => []
         ]);
+
+        /*
+        if current user is not the owner, throw exception.
+         */
+        if ($note->user_id !== $this->Auth->user('id')) {
+            throw new UnauthorizedException();
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->data);
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
             }
