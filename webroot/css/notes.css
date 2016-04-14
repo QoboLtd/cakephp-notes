@@ -1,0 +1,30 @@
+.add-new-note {
+    margin-bottom: 15px;
+}
+
+.note {
+    box-shadow: 3px 3px 7px 0px #aaa;
+}
+
+.note .actions {
+    position: relative;
+    bottom: 5px;
+    right: -21px;
+    color: inherit;
+    float: right;
+}
+
+.note .actions a {
+    line-height: 1;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+.note .actions a:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
