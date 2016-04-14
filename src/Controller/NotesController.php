@@ -159,6 +159,14 @@ class NotesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $note = $this->Notes->get($id);
+
+        /*
+        if current user is not the owner, throw exception.
+         */
+        if ($note->user_id !== $this->Auth->user('id')) {
+            throw new UnauthorizedException();
+        }
+
         if ($this->Notes->delete($note)) {
             $this->Flash->success(__('The note has been deleted.'));
         } else {
