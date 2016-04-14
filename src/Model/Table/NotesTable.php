@@ -22,10 +22,10 @@ class NotesTable extends Table
      * @var array
      */
     protected $_types = [
-        'yellow',
-        'blue',
-        'red',
-        'green'
+        'warning' => 'Yellow',
+        'info' => 'Blue',
+        'danger' => 'Red',
+        'success' => 'Green'
     ];
 
     /**
@@ -132,11 +132,7 @@ class NotesTable extends Table
      */
     public function getTypes()
     {
-        $result = array_combine($this->_types, array_map(function ($v) {
-            return Inflector::humanize($v);
-        }, $this->_types));
-
-        return $result;
+        return $this->_types;
     }
 
     /**
