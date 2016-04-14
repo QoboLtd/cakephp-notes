@@ -105,7 +105,14 @@ class NotesController extends AppController
             $note = $this->Notes->patchEntity($note, $data);
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $redirectUrl = $this->referer();
+                /**
+                 * @todo handle this better, probably get rid of add View and redirect always back to referer
+                 */
+                if (\Cake\Routing\Router::url('/', true) . $this->request->url === $this->referer()) {
+                    $this->redirect(['action' => 'my-notes']);
+                }
+                return $this->redirect($redirectUrl);
             } else {
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
             }
