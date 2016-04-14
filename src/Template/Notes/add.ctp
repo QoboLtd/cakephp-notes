@@ -15,10 +15,7 @@
                         <div class="col-xs-6">
                             <?= $this->Form->input('shared', ['options' => $shared, 'empty' => true]); ?>
                         </div>
-                        <div class="col-xs-6">
-                            <?= $this->Form->input('title'); ?>
-                        </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-12">
                             <?= $this->Form->input('content'); ?>
                         </div>
                     </div>
