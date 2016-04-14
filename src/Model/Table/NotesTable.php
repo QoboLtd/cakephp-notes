@@ -59,7 +59,6 @@ class NotesTable extends Table
         parent::initialize($config);
 
         $this->table('notes');
-        $this->displayField('title');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -83,10 +82,6 @@ class NotesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
-
-        $validator
             ->requirePresence('type', 'create')
             ->notEmpty('type');
 
@@ -95,7 +90,7 @@ class NotesTable extends Table
             ->notEmpty('user_id');
 
         $validator
-            ->allowEmpty('model');
+            ->allowEmpty('related_model');
 
         $validator
             ->requirePresence('shared', 'create')
@@ -106,8 +101,8 @@ class NotesTable extends Table
             ->notEmpty('content');
 
         $validator
-            ->uuid('primary_key')
-            ->allowEmpty('primary_key');
+            ->uuid('related_id')
+            ->allowEmpty('related_id');
 
         return $validator;
     }
