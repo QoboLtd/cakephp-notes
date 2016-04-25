@@ -4,6 +4,7 @@
 
 .note {
     box-shadow: 3px 3px 7px 0px #aaa;
+    word-wrap: break-word;
 }
 
 .note .actions {
