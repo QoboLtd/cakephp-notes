@@ -109,7 +109,7 @@ class NotesController extends AppController
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
                 $redirectUrl = $this->referer();
-                /**
+                /*
                  * @todo handle this better, probably get rid of add View and redirect always back to referer
                  */
                 if (\Cake\Routing\Router::url('/', true) . $this->request->url === $this->referer()) {
