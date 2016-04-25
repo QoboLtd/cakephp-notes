@@ -20,3 +20,6 @@ script:
   - ./vendor/bin/phpunit
   - ./vendor/bin/phpcs -n -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/Fixture/ tests/TestCase/
 
+notifications:
+    email:
+        - webdev@qobocloud.com
