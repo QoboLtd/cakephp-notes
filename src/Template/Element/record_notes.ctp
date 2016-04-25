@@ -1,12 +1,32 @@
 <?= $this->Html->css('Notes.notes'); ?>
 
 <?php
-$colWidth = isset($rowItems) ? 12 / $rowItems : 12;
+$gridSize = 12;
+/*
+set lg width
+ */
+$lgColWidth = isset($rowItems) ? $gridSize / $rowItems : $gridSize;
+$lgColWidth = $lgColWidth > $gridSize ? $gridSize : $lgColWidth;
+/*
+set md width
+ */
+$mdColWidth = $lgColWidth;
+$mdColWidth = $mdColWidth > $gridSize ? $gridSize : $mdColWidth;
+/*
+set sm width
+ */
+$smColWidth = $lgColWidth * 2;
+$smColWidth = $smColWidth > $gridSize ? $gridSize : $smColWidth;
+/*
+set xs width
+ */
+$xsColWidth = $lgColWidth * 3;
+$xsColWidth = $xsColWidth > $gridSize ? $gridSize : $xsColWidth;
 ?>
 
 <div class="row">
     <?php foreach ($notes as $k => $note) : ?>
-    <div class="col-xs-<?= $colWidth ?>">
+    <div class="col-xs-<?= $xsColWidth ?> col-sm-<?= $smColWidth ?> col-md-<?= $mdColWidth ?> col-lg-<?= $lgColWidth ?>">
         <div class="alert alert-<?= $note->type ?> alert-dismissible note" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

@@ -9,10 +9,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <?= $this->Form->input('type', ['options' => $types, 'empty' => true]); ?>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <?= $this->Form->input('shared', ['options' => $shared, 'empty' => true]); ?>
                         </div>
                         <div class="col-xs-12">
