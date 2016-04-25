@@ -25,9 +25,6 @@ class NotesTableTest extends TestCase
      */
     public $fixtures = [
         'plugin.notes.notes',
-        'plugin.notes.users',
-        'plugin.notes.phinxlog',
-        'plugin.notes.notes_phinxlog'
     ];
 
     /**
