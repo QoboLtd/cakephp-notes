@@ -7,9 +7,7 @@
 </div>
 
 <?php if (!empty($notes)) : ?>
-    <?= $this->element('Notes.record_notes', [
-        'rowItems' => 6
-    ]); ?>
+    <?= $this->element('Notes.record_notes'); ?>
 <?php endif; ?>
 
 <div class="paginator">
