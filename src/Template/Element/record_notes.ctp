@@ -1,27 +1,33 @@
 <?= $this->Html->css('Notes.notes'); ?>
 
 <?php
-$gridSize = 12;
 /*
 set lg width
  */
-$lgColWidth = isset($rowItems) ? $gridSize / $rowItems : $gridSize;
-$lgColWidth = $lgColWidth > $gridSize ? $gridSize : $lgColWidth;
+$lgColWidth = 2;
 /*
 set md width
  */
-$mdColWidth = $lgColWidth;
-$mdColWidth = $mdColWidth > $gridSize ? $gridSize : $mdColWidth;
+$mdColWidth = 3;
 /*
 set sm width
  */
-$smColWidth = $lgColWidth * 2;
-$smColWidth = $smColWidth > $gridSize ? $gridSize : $smColWidth;
+$smColWidth = 4;
 /*
 set xs width
  */
-$xsColWidth = $lgColWidth * 3;
-$xsColWidth = $xsColWidth > $gridSize ? $gridSize : $xsColWidth;
+$xsColWidth = 6;
+
+if (isset($notesView)) {
+    switch ($notesView) {
+        case 'record':
+            $lgColWidth = 12;
+            $mdColWidth = 12;
+            $smColWidth = 6;
+            $xsColWidth = 6;
+            break;
+    }
+}
 ?>
 
 <div class="row">
