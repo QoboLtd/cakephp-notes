@@ -9,3 +9,14 @@ The recommended way to install composer packages is:
 ```
 composer require qobo/cakephp-notes
 ```
+
+## Setup
+Load plugin
+```
+bin/cake plugin load --routes Notes
+```
+
+Load required plugin(s)
+```
+bin/cake plugin load Muffin/Trash
+```
