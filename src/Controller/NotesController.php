@@ -115,6 +115,7 @@ class NotesController extends AppController
                 if (\Cake\Routing\Router::url('/', true) . $this->request->url === $this->referer()) {
                     $this->redirect(['action' => 'my-notes']);
                 }
+
                 return $this->redirect($redirectUrl);
             } else {
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
@@ -150,6 +151,7 @@ class NotesController extends AppController
             $note = $this->Notes->patchEntity($note, $this->request->data);
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
+
                 return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
@@ -185,6 +187,7 @@ class NotesController extends AppController
         } else {
             $this->Flash->error(__('The note could not be deleted. Please, try again.'));
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }
