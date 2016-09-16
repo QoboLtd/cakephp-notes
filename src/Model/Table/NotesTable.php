@@ -62,6 +62,7 @@ class NotesTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Trash.Trash');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
@@ -117,6 +118,7 @@ class NotesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+
         return $rules;
     }
 
