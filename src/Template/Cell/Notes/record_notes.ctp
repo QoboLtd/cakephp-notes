@@ -18,8 +18,39 @@
                     'plugin' => 'Notes', 'controller' => 'Notes', 'action' => 'add'
                 ]]); ?>
                 <fieldset>
-                    <?= $this->Form->input('type', ['options' => $types, 'empty' => '(choose type)', 'class' => 'input-sm', 'label' => false]); ?>
-                    <?= $this->Form->input('shared', ['options' => $shared, 'empty' => '(choose visibility)', 'class' => 'input-sm', 'label' => false]); ?>
+                    <?php
+                        $typeOptions = [];
+                        foreach ($types as $value => $label) {
+                            $typeOptions[] = [
+                                'value' => $value,
+                                'text' => '<span class="label label-' . $value . '">&nbsp;</span>'
+                            ];
+                        }
+                    ?>
+                    <div class="form-group">
+                        <?= $this->Form->radio('type', $typeOptions, [
+                            'escape' => false,
+                            'label' => false,
+                            'inline' => true,
+                            'val' => 'info'
+                        ]); ?>
+                    </div>
+                    <?php
+                        $sharedOptions = [];
+                        foreach ($shared as $value => $label) {
+                            $sharedOptions[] = [
+                                'value' => $value,
+                                'text' => $label
+                            ];
+                        }
+                    ?>
+                    <div class="form-group">
+                        <?= $this->Form->radio('shared', $sharedOptions, [
+                            'escape' => false,
+                            'inline' => true,
+                            'val' => 'private'
+                        ]); ?>
+                    </div>
                     <?= $this->Form->input('content', ['type' => 'textarea', 'class' => 'input-sm', 'label' => false, 'placeholder' => 'note content']); ?>
                     <?= $this->Form->hidden('related_model', ['value' => $this->request->params['controller']]); ?>
                     <?php if (isset($this->request->params['pass']) && !empty($this->request->params['pass'][0])) : ?>

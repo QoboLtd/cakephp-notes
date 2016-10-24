@@ -39,7 +39,7 @@ if (isset($notesView)) {
             </button>
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <strong><?= $note->user->username ?></strong>
-            <p><?= $note->content ?></p>
+            <?= $this->Text->autoParagraph($note->content) ?>
             <span class="actions">
                 <?php if ($this->request->session()->read('Auth.User.id') === $note->user_id) : ?>
                 <?= $this->Html->link('', [

@@ -22,10 +22,10 @@ class NotesTable extends Table
      * @var array
      */
     protected $_types = [
-        'warning' => 'Yellow',
         'info' => 'Blue',
-        'danger' => 'Red',
-        'success' => 'Green'
+        'success' => 'Green',
+        'warning' => 'Yellow',
+        'danger' => 'Red'
     ];
 
     /**
