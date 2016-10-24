@@ -52,7 +52,13 @@
                         ]); ?>
                     </div>
                     <?= $this->Form->input('content', ['type' => 'textarea', 'class' => 'input-sm', 'label' => false, 'placeholder' => 'note content']); ?>
-                    <?= $this->Form->hidden('related_model', ['value' => $this->request->params['controller']]); ?>
+                    <?php
+                        $relatedModel = $this->request->param('controller');
+                        if ($this->request->param('plugin')) {
+                            $relatedModel = $this->request->param('plugin') . '.' . $relatedModel;
+                        }
+                    ?>
+                    <?= $this->Form->hidden('related_model', ['value' => $relatedModel]); ?>
                     <?php if (isset($this->request->params['pass']) && !empty($this->request->params['pass'][0])) : ?>
                         <?= $this->Form->hidden('related_id', ['value' => $this->request->params['pass'][0]]); ?>
                     <?php endif; ?>
