@@ -8,10 +8,6 @@
 }
 
 .note .actions {
-    position: relative;
-    bottom: 5px;
-    right: -21px;
-    color: inherit;
     float: right;
 }
 
