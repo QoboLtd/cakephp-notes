@@ -16,7 +16,8 @@ class NotesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.notes.notes'
+        'plugin.notes.notes',
+        'plugin.notes.users',
     ];
 
     /**
@@ -26,7 +27,19 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+        $this->get('/notes/notes');
+        $this->assertResponseOk();
+        $this->assertResponseContains('User 1 private note');
+        $this->assertResponseContains('User 1 public note');
+        $this->assertResponseNotContains('User 2 private note');
+        $this->assertResponseContains('User 2 public note');
     }
 
     /**
@@ -36,7 +49,17 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+        $this->get('/notes/notes/view/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
+        $this->get('/notes/notes/view/00000000-0000-0000-0000-000000000002');
+        $this->assertResponseOk();
     }
 
     /**
@@ -46,7 +69,15 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+        $this->get('/notes/notes/add');
+        $this->assertResponseOk();
     }
 
     /**
@@ -56,7 +87,17 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+        $this->get('/notes/notes/edit/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
+        $this->get('/notes/notes/edit/00000000-0000-0000-0000-000000000002');
+        $this->assertResponseOk();
     }
 
     /**
@@ -66,6 +107,16 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+        $this->post('/notes/notes/delete/00000000-0000-0000-0000-000000000001');
+        $this->assertRedirect();
+        $this->post('/notes/notes/delete/00000000-0000-0000-0000-000000000002');
+        $this->assertRedirect();
     }
 }
