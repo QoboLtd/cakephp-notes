@@ -1,5 +1,5 @@
 <?php
-namespace Foobar\Test\App\Config;
+namespace Notes\Test\App\Config;
 
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
