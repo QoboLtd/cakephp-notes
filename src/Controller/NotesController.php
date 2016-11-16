@@ -14,7 +14,7 @@ class NotesController extends AppController
     /**
      * My notes method
      *
-     * @return \Cake\Network\Response|null
+     * @return void
      */
     public function myNotes()
     {
@@ -40,7 +40,7 @@ class NotesController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null
+     * @return void
      */
     public function index()
     {
@@ -69,9 +69,9 @@ class NotesController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Note id.
-     * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param string|null $id Note id.
+     * @return void
      */
     public function view($id = null)
     {
