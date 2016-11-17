@@ -20,43 +20,43 @@
                 <fieldset>
                     <?php
                         $typeOptions = [];
-                        foreach ($types as $value => $label) {
-                            $typeOptions[] = [
-                                'value' => $value,
-                                'text' => '<span class="label label-' . $value . '">&nbsp;</span>'
-                            ];
-                        }
+                    foreach ($types as $value => $label) {
+                        $typeOptions[] = [
+                            'value' => $value,
+                            'text' => '<span class="label label-' . $value . '">&nbsp;</span>'
+                        ];
+                    }
                     ?>
                     <div class="form-group">
                         <?= $this->Form->radio('type', $typeOptions, [
-                            'escape' => false,
-                            'label' => false,
-                            'inline' => true,
-                            'val' => 'info'
+                                'escape' => false,
+                                'label' => false,
+                                'inline' => true,
+                                'val' => 'info'
                         ]); ?>
                     </div>
                     <?php
                         $sharedOptions = [];
-                        foreach ($shared as $value => $label) {
-                            $sharedOptions[] = [
-                                'value' => $value,
-                                'text' => $label
-                            ];
-                        }
+                    foreach ($shared as $value => $label) {
+                        $sharedOptions[] = [
+                            'value' => $value,
+                            'text' => $label
+                        ];
+                    }
                     ?>
                     <div class="form-group">
                         <?= $this->Form->radio('shared', $sharedOptions, [
-                            'escape' => false,
-                            'inline' => true,
-                            'val' => 'private'
+                                'escape' => false,
+                                'inline' => true,
+                                'val' => 'private'
                         ]); ?>
                     </div>
                     <?= $this->Form->input('content', ['type' => 'textarea', 'class' => 'input-sm', 'label' => false, 'placeholder' => 'note content']); ?>
                     <?php
                         $relatedModel = $this->request->param('controller');
-                        if ($this->request->param('plugin')) {
-                            $relatedModel = $this->request->param('plugin') . '.' . $relatedModel;
-                        }
+                    if ($this->request->param('plugin')) {
+                        $relatedModel = $this->request->param('plugin') . '.' . $relatedModel;
+                    }
                     ?>
                     <?= $this->Form->hidden('related_model', ['value' => $relatedModel]); ?>
                     <?php if (isset($this->request->params['pass']) && !empty($this->request->params['pass'][0])) : ?>

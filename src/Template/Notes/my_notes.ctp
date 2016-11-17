@@ -1,1 +1,1 @@
-<?php $this->extend('/Common/index'); ?>
+<?php $this->extend('/Common/index');

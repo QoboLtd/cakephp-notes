@@ -11,4 +11,4 @@ if ($this->request->plugin) {
 <?= $this->cell('Notes.Notes::recordNotes', [
     $relatedModel,
     $relatedId
-]); ?>
+]);

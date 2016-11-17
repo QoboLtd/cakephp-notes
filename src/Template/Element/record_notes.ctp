@@ -67,22 +67,22 @@ if (isset($notesView)) {
             <div class="panel-footer">
                 <?php
                     $relatedLink = [];
-                    if ($note->has('related_model') && $note->has('related_id')) {
-                        try {
-                            $relatedTable = \Cake\ORM\TableRegistry::get($note->related_model);
-                            $relatedEntity = $relatedTable->get($note->related_id);
-                            $relatedLink['title'] = \Cake\Utility\Inflector::humanize(
-                                \Cake\Utility\Inflector::underscore($relatedTable->alias())
-                            ) . ' &gt; ';
-                            $relatedLink['title'] .= $relatedEntity->{$relatedTable->displayField()};
-                            $url['action'] = 'view';
-                            list($url['plugin'], $url['controller']) = pluginSplit($note->related_model);
-                            array_push($url, $note->related_id);
-                            $relatedLink['url'] = $this->Url->build($url);
-                        } catch (\Exception $e) {
-                            //
-                        }
+                if ($note->has('related_model') && $note->has('related_id')) {
+                    try {
+                        $relatedTable = \Cake\ORM\TableRegistry::get($note->related_model);
+                        $relatedEntity = $relatedTable->get($note->related_id);
+                        $relatedLink['title'] = \Cake\Utility\Inflector::humanize(
+                            \Cake\Utility\Inflector::underscore($relatedTable->alias())
+                        ) . ' &gt; ';
+                        $relatedLink['title'] .= $relatedEntity->{$relatedTable->displayField()};
+                        $url['action'] = 'view';
+                        list($url['plugin'], $url['controller']) = pluginSplit($note->related_model);
+                        array_push($url, $note->related_id);
+                        $relatedLink['url'] = $this->Url->build($url);
+                    } catch (\Exception $e) {
+                        //
                     }
+                }
                 ?>
                 <?php if (!empty($relatedLink)) : ?>
                 <a href="<?= $relatedLink['url']; ?>">
