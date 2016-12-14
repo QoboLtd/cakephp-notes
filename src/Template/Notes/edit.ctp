@@ -10,10 +10,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <?= $this->Form->input('type', ['options' => $types]); ?>
+                            <?= $this->Form->input('type', ['options' => $types, 'required' => true, 'label' => ['class' => 'control-label']]); ?>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <?= $this->Form->input('shared', ['options' => $shared]); ?>
+                            <?= $this->Form->input('shared', ['options' => $shared, 'required' => true, 'label' => ['class' => 'control-label']]); ?>
                         </div>
                     </div>
                     <div class="row">
