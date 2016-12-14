@@ -35,7 +35,7 @@ if (isset($notesView)) {
     <div class="col-xs-<?= $xsColWidth ?> col-sm-<?= $smColWidth ?> col-md-<?= $mdColWidth ?> col-lg-<?= $lgColWidth ?>">
         <div class="panel panel-<?= $note->type ?> note">
             <div class="panel-heading">
-                <span class="fa <?= ( ($note->shared === 'public') ? 'fa-user' : 'fa-user-secret') ?>" aria-hidden="true"></span>
+                <span class="fa <?= ( ($note->shared === 'public') ? 'fa-unlock' : 'fa-lock') ?>" aria-hidden="true"></span>
                 <strong><?= $note->user->username ?></strong>
                 <span class="actions">
                     <?php if ($this->request->session()->read('Auth.User.id') === $note->user_id) : ?>
