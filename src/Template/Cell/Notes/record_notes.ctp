@@ -37,12 +37,12 @@
                     </div>
                     <?php
                         $sharedOptions = [];
-                        foreach ($shared as $value => $label) {
-                            $sharedOptions[] = [
-                                'value' => $value,
-                                'text' => $label
-                            ];
-                        }
+                    foreach ($shared as $value => $label) {
+                        $sharedOptions[] = [
+                            'value' => $value,
+                            'text' => $label
+                        ];
+                    }
                     ?>
                     <div class="form-group">
                         <?= $this->Form->radio('shared', $sharedOptions, [
