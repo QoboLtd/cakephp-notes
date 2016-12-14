@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div class="text-right add-new-note">
             <?= $this->Html->link(
-                '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>',
+                '<span class="fa fa-plus" aria-hidden="true"></span>',
                 '#collapseNotesForm',
                 [
                     'title' => __('Add a new Note'),
@@ -27,7 +27,7 @@
                         ];
                     }
                     ?>
-                    <div class="form-group">
+                    <div class="form-group note-colors">
                         <?= $this->Form->radio('type', $typeOptions, [
                                 'escape' => false,
                                 'label' => false,
@@ -37,12 +37,12 @@
                     </div>
                     <?php
                         $sharedOptions = [];
-                    foreach ($shared as $value => $label) {
-                        $sharedOptions[] = [
-                            'value' => $value,
-                            'text' => $label
-                        ];
-                    }
+                        foreach ($shared as $value => $label) {
+                            $sharedOptions[] = [
+                                'value' => $value,
+                                'text' => $label
+                            ];
+                        }
                     ?>
                     <div class="form-group">
                         <?= $this->Form->radio('shared', $sharedOptions, [
