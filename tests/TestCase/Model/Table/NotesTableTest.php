@@ -67,8 +67,8 @@ class NotesTableTest extends TestCase
         $result = $this->Notes->getShared();
         $this->assertTrue(is_array($result), "getShared() returns a non-array");
         $this->assertFalse(empty($result), "getShared() returns an empty result");
-        $this->assertContains('Private', $result, "'Private' is not in returned shared values");
-        $this->assertContains('Public', $result, "'Public' is not in returned shared values");
+        $this->assertArrayHasKey('private', $result, "'Private' is not in returned shared values");
+        $this->assertArrayHasKey('public', $result, "'Public' is not in returned shared values");
     }
 
     public function testGetPublicShared()
