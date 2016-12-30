@@ -67,34 +67,6 @@ class NotesController extends AppController
     }
 
     /**
-     * View method
-     *
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @param string|null $id Note id.
-     * @return void
-     */
-    public function view($id = null)
-    {
-        $note = $this->Notes->get($id, [
-            'contain' => ['Users']
-        ]);
-
-        $sharedPrivate = $this->Notes->getPrivateShared();
-        /*
-        if note is private and current user is not the owner, throw exception.
-         */
-        if ($note->shared === $sharedPrivate && $note->user_id !== $this->Auth->user('id')) {
-            throw new UnauthorizedException();
-        }
-
-        $types = $this->Notes->getTypes();
-        $shared = $this->Notes->getShared();
-
-        $this->set(compact('note', 'types', 'shared'));
-        $this->set('_serialize', ['note']);
-    }
-
-    /**
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
