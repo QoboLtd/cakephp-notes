@@ -33,9 +33,9 @@ if (isset($notesView)) {
 <div class="row">
     <?php foreach ($notes as $k => $note) : ?>
     <div class="col-xs-<?= $xsColWidth ?> col-sm-<?= $smColWidth ?> col-md-<?= $mdColWidth ?> col-lg-<?= $lgColWidth ?>">
-        <div class="panel panel-<?= $note->type ?> note">
-            <div class="panel-heading">
-                <span class="fa <?= ( ($note->shared === 'public') ? 'fa-unlock' : 'fa-lock') ?>" aria-hidden="true"></span>
+        <div class="box box-<?= $note->type ?> note">
+            <div class="box-header with-border">
+                <span class="fa <?= $note->shared === 'public' ? 'fa-eye' : 'fa-eye-slash'; ?>" aria-hidden="true"></span>
                 <strong><?= $note->user->username ?></strong>
                 <span class="actions">
                     <?php if ($this->request->session()->read('Auth.User.id') === $note->user_id) : ?>
@@ -61,10 +61,10 @@ if (isset($notesView)) {
                     <?php endif; ?>
                 </span>
             </div>
-            <div class="panel-body">
+            <div class="box-body">
                 <?= $this->Text->autoParagraph($note->content) ?>
             </div>
-            <div class="panel-footer">
+            <div class="box-footer small">
                 <?php
                     $relatedLink = [];
                 if ($note->has('related_model') && $note->has('related_id')) {
@@ -85,9 +85,7 @@ if (isset($notesView)) {
                 }
                 ?>
                 <?php if (!empty($relatedLink)) : ?>
-                <a href="<?= $relatedLink['url']; ?>">
-                    <span class="fa fa-link" aria-hidden="true"></span> <?= $relatedLink['title']; ?>
-                </a>
+                <a href="<?= $relatedLink['url']; ?>"><?= $relatedLink['title']; ?></a>
                 <?php else : ?>
                     &nbsp;
                 <?php endif; ?>
