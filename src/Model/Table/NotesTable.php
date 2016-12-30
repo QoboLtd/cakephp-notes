@@ -44,8 +44,14 @@ class NotesTable extends Table
      * @var array
      */
     protected $_shared = [
-        'private',
-        'public'
+        'private' => [
+            'label' => 'Private',
+            'icon' => 'eye-slash'
+        ],
+        'public' => [
+            'label' => 'Public',
+            'icon' => 'eye'
+        ]
     ];
 
     /**
@@ -139,11 +145,7 @@ class NotesTable extends Table
      */
     public function getShared()
     {
-        $result = array_combine($this->_shared, array_map(function ($v) {
-            return Inflector::humanize($v);
-        }, $this->_shared));
-
-        return $result;
+        return $this->_shared;
     }
 
     /**
