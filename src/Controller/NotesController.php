@@ -151,8 +151,7 @@ class NotesController extends AppController
             $note = $this->Notes->patchEntity($note, $this->request->data);
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
-
-                return $this->redirect($this->referer());
+                $this->redirect(['action' => 'my-notes']);
             } else {
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
             }
