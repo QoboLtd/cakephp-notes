@@ -1,13 +1,4 @@
-.note-colors .radio-inline {
-    height: 25px;
-    width: 30px;
-}
-.add-new-note {
-    margin-bottom: 15px;
-}
-
 .note {
-    box-shadow: 3px 3px 7px 0px #aaa;
     word-wrap: break-word;
 }
 
