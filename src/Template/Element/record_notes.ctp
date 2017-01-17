@@ -1,6 +1,8 @@
-<?= $this->Html->css('Notes.notes'); ?>
-
 <?php
+use Cake\Database\Exception;
+
+echo $this->Html->css('Notes.notes', ['block' => 'css']);
+
 /*
 set lg width
  */
@@ -66,7 +68,8 @@ if (isset($notesView)) {
             </div>
             <div class="box-footer small">
                 <?php
-                    $relatedLink = [];
+                $relatedLink = [];
+                $url = [];
                 if ($note->has('related_model') && $note->has('related_id')) {
                     try {
                         $relatedTable = \Cake\ORM\TableRegistry::get($note->related_model);
@@ -79,7 +82,7 @@ if (isset($notesView)) {
                         list($url['plugin'], $url['controller']) = pluginSplit($note->related_model);
                         array_push($url, $note->related_id);
                         $relatedLink['url'] = $this->Url->build($url);
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         //
                     }
                 }
