@@ -43,26 +43,6 @@ class NotesControllerTest extends IntegrationTestCase
     }
 
     /**
-     * Test view method
-     *
-     * @return void
-     */
-    public function testView()
-    {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-        $this->get('/notes/notes/view/00000000-0000-0000-0000-000000000001');
-        $this->assertResponseOk();
-        $this->get('/notes/notes/view/00000000-0000-0000-0000-000000000002');
-        $this->assertResponseOk();
-    }
-
-    /**
      * Test add method
      *
      * @return void

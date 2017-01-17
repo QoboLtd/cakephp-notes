@@ -1,28 +1,87 @@
-<div class="row">
-    <div class="col-xs-12">
-        <?= $this->Form->create($note); ?>
-        <fieldset>
-            <legend><?= __('Add {0}', ['Note']) ?></legend>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">&nbsp;</h3>
+<?php
+echo $this->Html->scriptBlock(
+    '$("#color-chooser > li > a").click(function (e) {
+        e.preventDefault();
+        // save color
+        currColor = $(this).css("color");
+        // add color effect to button
+        $("#add-new-note").css({"background-color": currColor, "border-color": currColor});
+        // save value
+        currValue = $(this).data("value");
+        // add value to "type" input
+        $("[name=\'Notes[type]\']").val(currValue);
+    });
+    $("#shared-chooser > li > a").click(function (e) {
+        e.preventDefault();
+        // save value
+        currValue = $(this).data("value");
+        // add value to "type" input
+        $("[name=\'Notes[shared]\']").val(currValue);
+    });',
+    ['block' => 'scriptBotton']
+);
+?>
+<section class="content-header">
+    <h1><?= __('Create {0}', ['Note']) ?></h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">&nbsp;</h3>
                 </div>
-                <div class="panel-body">
+                <?= $this->Form->create($note); ?>
+                <?= $this->Form->hidden('Notes.type', ['value' => key($types)]); ?>
+                <?= $this->Form->hidden('Notes.shared', ['value' => key($shared)]); ?>
+                <div class="box-body">
                     <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <?= $this->Form->input('type', ['options' => $types, 'empty' => true, 'required' => true, 'label' => ['class' => 'control-label']]); ?>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <ul class="fc-color-picker" id="color-chooser">
+                                    <?php foreach ($types as $k => $v) : ?>
+                                        <li>
+                                            <a class="text-<?= strtolower($v); ?>" href="#" data-value="<?= $k; ?>">
+                                                <i class="fa fa-square"></i>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-6">
-                            <?= $this->Form->input('shared', ['options' => $shared, 'empty' => true, 'required' => true, 'label' => ['class' => 'control-label']]); ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?= $this->Form->input('content'); ?>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <ul class="fc-color-picker" id="shared-chooser">
+                                    <?php foreach ($shared as $k => $v) : ?>
+                                        <li>
+                                            <a class="text-black" href="#" data-value="<?= $k; ?>">
+                                                <i class="fa fa-<?= $v['icon']; ?>"></i>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <?= $this->Form->input('Notes.content', [
+                        'type' => 'textarea',
+                        'label' => false,
+                        'required' => true,
+                        'placeholder' => 'Message:'
+                    ]); ?>
                 </div>
+                <div class="box-footer">
+                    <?= $this->Form->button(__('Submit'), [
+                        'class' => 'btn btn-primary',
+                        'id' => 'add-new-note'
+                    ]); ?>
+                </div>
+                <?= $this->Form->end() ?>
             </div>
-        </fieldset>
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
-        <?= $this->Form->end() ?>
+        </div>
     </div>
-</div>
+</section>

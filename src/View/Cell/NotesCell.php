@@ -36,6 +36,6 @@ class NotesCell extends Cell
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
 
-        $this->set(compact('currentUser', 'notes', 'types', 'shared'));
+        $this->set(compact('relatedModel', 'relatedId', 'notes', 'types', 'shared'));
     }
 }
