@@ -13,6 +13,10 @@ echo $this->Html->scriptBlock(
     });
     $("#shared-chooser > li > a").click(function (e) {
         e.preventDefault();
+        // save icon
+        currIcon = $(this).children("i").attr("class");
+        // add icon to button
+        $("#add-new-note").children("i").removeClass().addClass(currIcon);
         // save value
         currValue = $(this).data("value");
         // add value to "type" input
@@ -75,7 +79,7 @@ echo $this->Html->scriptBlock(
                     ]); ?>
                 </div>
                 <div class="box-footer">
-                    <?= $this->Form->button(__('Submit'), [
+                    <?= $this->Form->button('<i class="fa fa-eye-slash"></i> ' . __('Submit'), [
                         'class' => 'btn btn-primary',
                         'id' => 'add-new-note'
                     ]); ?>

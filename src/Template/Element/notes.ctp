@@ -27,6 +27,10 @@ echo $this->Html->scriptBlock(
     });
     $("#shared-chooser > li > a").click(function (e) {
         e.preventDefault();
+        // save icon
+        currIcon = $(this).children("i").attr("class");
+        // add icon to button
+        $("#add-new-note").children("i").removeClass().addClass(currIcon);
         // save value
         currValue = $(this).data("value");
         // add value to "type" input

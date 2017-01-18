@@ -1,12 +1,14 @@
 <section class="content-header">
     <h1>Notes
-        <small>
+        <div class="pull-right">
+            <div class="btn-group btn-group-sm" role="group">
             <?= $this->Html->link(
-                '<i class="fa fa-plus"></i>',
+                '<i class="fa fa-plus"></i> ' . __('Add'),
                 ['plugin' => 'Notes', 'controller' => 'Notes', 'action' => 'add'],
-                ['escape' => false]
+                ['escape' => false, 'title' => __('Add'), 'class' => 'btn btn-default']
             ); ?>
-        </small>
+            </div>
+        </div>
     </h1>
 </section>
 
