@@ -51,8 +51,8 @@
     </div>
     <div class="box-footer">
         <div class="pull-right">
-            <?= $this->Form->button('<i class="fa fa-sticky-note"></i> ' . __('Add'), [
-                'class' => 'btn btn-primary btn-sm',
+            <?= $this->Form->button('<i class="fa fa-eye-slash"></i> ' . __('Add'), [
+                'class' => 'btn btn-primary',
                 'id' => 'add-new-note'
             ]); ?>
         </div>
