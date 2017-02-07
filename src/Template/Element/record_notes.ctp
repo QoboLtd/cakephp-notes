@@ -1,6 +1,4 @@
 <?php
-use Cake\Database\Exception;
-
 echo $this->Html->css('Notes.notes', ['block' => 'css']);
 
 /*
@@ -82,7 +80,7 @@ if (isset($notesView)) {
                         list($url['plugin'], $url['controller']) = pluginSplit($note->related_model);
                         array_push($url, $note->related_id);
                         $relatedLink['url'] = $this->Url->build($url);
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         //
                     }
                 }
