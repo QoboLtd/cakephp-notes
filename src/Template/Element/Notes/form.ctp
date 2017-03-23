@@ -8,7 +8,7 @@ if ($this->request->plugin) {
     $relatedModel = $this->request->plugin . '.' . $relatedModel;
 }
 
-echo $this->cell('Notes.Notes::recordNotes', [
+echo $this->cell('Notes.Notes::form', [
     $relatedModel,
     $relatedId
 ]);

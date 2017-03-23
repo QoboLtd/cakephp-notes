@@ -12,7 +12,23 @@ class NotesCell extends Cell
      * @param  string $relatedId related record id
      * @return void
      */
-    public function recordNotes($relatedModel, $relatedId)
+    public function form($relatedModel, $relatedId)
+    {
+        $currentUser = $this->request->session()->read('Auth.User');
+        $this->loadModel('Notes.Notes');
+        $types = $this->Notes->getTypes();
+        $shared = $this->Notes->getShared();
+
+        $this->set(compact('relatedModel', 'relatedId', 'types', 'shared'));
+    }
+    /**
+     * Pass record specific notes to the View, based on current user and visibility.
+     *
+     * @param  string $relatedModel related model name
+     * @param  string $relatedId related record id
+     * @return void
+     */
+    public function listing($relatedModel, $relatedId)
     {
         $currentUser = $this->request->session()->read('Auth.User');
         $this->loadModel('Notes.Notes');
@@ -32,10 +48,8 @@ class NotesCell extends Cell
             ])
             ->order([
                 'Notes.modified' => 'DESC'
-            ]);
-        $types = $this->Notes->getTypes();
-        $shared = $this->Notes->getShared();
+            ])->all();
 
-        $this->set(compact('relatedModel', 'relatedId', 'notes', 'types', 'shared'));
+        $this->set(compact('relatedModel', 'relatedId', 'notes'));
     }
 }

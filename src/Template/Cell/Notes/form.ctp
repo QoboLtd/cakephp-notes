@@ -59,9 +59,3 @@
     </div>
     <?= $this->Form->end() ?>
 </div>
-
-<?php if (!empty($notes)) : ?>
-    <?= $this->element('Notes.record_notes', [
-        'notesView' => 'record'
-    ]); ?>
-<?php endif; ?>
