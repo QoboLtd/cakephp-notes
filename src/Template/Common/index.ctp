@@ -14,7 +14,7 @@
 
 <section class="content">
     <?php if (!empty($notes)) : ?>
-        <?= $this->element('Notes.record_notes'); ?>
+        <?= $this->element('Notes.Notes/boxes'); ?>
     <?php endif; ?>
     <div class="box box-solid">
         <div class="box-footer">

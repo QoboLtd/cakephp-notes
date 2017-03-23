@@ -81,9 +81,7 @@ class NotesController extends AppController
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
                 $redirectUrl = $this->referer();
-                /*
-                 * @todo handle this better, probably get rid of add View and redirect always back to referer
-                 */
+                // @todo handle this better, probably get rid of add View and redirect always back to referer
                 if (\Cake\Routing\Router::url('/', true) . $this->request->url === $this->referer()) {
                     $this->redirect(['action' => 'my-notes']);
                 }
@@ -159,6 +157,6 @@ class NotesController extends AppController
             $this->Flash->error(__('The note could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->request->referer());
     }
 }
