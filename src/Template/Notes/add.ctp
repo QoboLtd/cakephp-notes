@@ -26,7 +26,11 @@ echo $this->Html->scriptBlock(
 );
 ?>
 <section class="content-header">
-    <h1><?= __('Create {0}', ['Note']) ?></h1>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <h4><?= __('Create {0}', ['Note']) ?></h4>
+        </div>
+    </div>
 </section>
 <section class="content">
     <div class="row">
