@@ -25,6 +25,7 @@ class NotesTableTest extends TestCase
      */
     public $fixtures = [
         'plugin.notes.notes',
+        'plugin.notes.users'
     ];
 
     /**
@@ -49,6 +50,40 @@ class NotesTableTest extends TestCase
         unset($this->Notes);
 
         parent::tearDown();
+    }
+
+    public function testValidationDefault()
+    {
+        $validator = new \Cake\Validation\Validator();
+        $result = $this->Notes->validationDefault($validator);
+
+        $this->assertInstanceOf('\Cake\Validation\Validator', $result);
+
+        $data = [
+            'type' => 'success',
+            'shared' => 'public',
+            'content' => 'Foobar',
+            'user_id' => '00000000-0000-0000-0000-000000000001',
+        ];
+
+        $entity = $this->Notes->newEntity($data);
+
+        $this->assertEmpty($entity->errors());
+    }
+
+    public function testSave()
+    {
+        $data = [
+            'type' => 'success',
+            'shared' => 'public',
+            'content' => 'Foobar',
+            'user_id' => '00000000-0000-0000-0000-000000000001',
+        ];
+
+        $entity = $this->Notes->newEntity($data);
+        $result = $this->Notes->save($entity);
+
+        $this->assertNotEmpty($result->get('id'));
     }
 
     public function testGetTypes()
