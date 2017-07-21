@@ -32,6 +32,8 @@ class NotesCell extends Cell
     {
         $currentUser = $this->request->session()->read('Auth.User');
         $this->loadModel('Notes.Notes');
+        $types = $this->Notes->getTypes();
+        $shared = $this->Notes->getShared();
         $notes = $this->Notes->find('all')
             ->contain([
                 'Users'
@@ -50,6 +52,6 @@ class NotesCell extends Cell
                 'Notes.modified' => 'DESC'
             ])->all();
 
-        $this->set(compact('relatedModel', 'relatedId', 'notes'));
+        $this->set(compact('relatedModel', 'relatedId', 'types', 'shared', 'notes'));
     }
 }

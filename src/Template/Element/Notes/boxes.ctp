@@ -1,43 +1,32 @@
 <?php
+use Cake\ORM\TableRegistry;
+use Cake\Utility\Inflector;
+
 echo $this->Html->css('Notes.notes', ['block' => 'css']);
 
-/*
-set lg width
- */
-$lgColWidth = 2;
-/*
-set md width
- */
-$mdColWidth = 3;
-/*
-set sm width
- */
-$smColWidth = 4;
-/*
-set xs width
- */
-$xsColWidth = 6;
-
-if (isset($notesView)) {
-    switch ($notesView) {
-        case 'record':
-            $lgColWidth = 12;
-            $mdColWidth = 12;
-            $smColWidth = 6;
-            $xsColWidth = 6;
-            break;
-    }
+$inPluginView = 'Notes' === $this->request->param('plugin');
+// set viewport widths
+if ($inPluginView) {
+    $viewport = ['lg' => 2, 'md' => 3, 'sm' => 4, 'xs' => 6];
+    $dividers = [
+        'lg' => 12 / $viewport['lg'],
+        'md' => 12 / $viewport['md'],
+        'sm' => 12 / $viewport['sm'],
+        'xs' => 12 / $viewport['xs'],
+    ];
+} else {
+    $viewport = ['lg' => 12, 'md' => 12, 'sm' => 6, 'xs' => 6];
 }
 ?>
 
 <div class="row">
-    <?php foreach ($notes as $k => $note) : ?>
-    <div class="col-xs-<?= $xsColWidth ?> col-sm-<?= $smColWidth ?> col-md-<?= $mdColWidth ?> col-lg-<?= $lgColWidth ?>">
-        <div class="box box-<?= $note->type ?> note">
+<?php foreach ($notes as $k => $note) : ?>
+    <div class="col-xs-<?= $viewport['xs'] ?> col-sm-<?= $viewport['sm'] ?> col-md-<?= $viewport['md'] ?> col-lg-<?= $viewport['lg'] ?>">
+        <div class="box box-<?= $note->type ?> box-solid note">
             <div class="box-header with-border">
-                <span class="fa <?= $note->shared === 'public' ? 'fa-eye' : 'fa-eye-slash'; ?>" aria-hidden="true"></span>
-                <strong><?= $note->user->username ?></strong>
-                <span class="actions">
+                <span class="fa fa-<?= $shared[$note->shared]['icon'] ?>" aria-hidden="true" title="<?= $shared[$note->shared]['label'] ?>"></span>
+                <strong title="Author"><?= $note->user->username ?></strong>
+                <span class="actions pull-right">
                     <?php if ($this->request->session()->read('Auth.User.id') === $note->user_id) : ?>
                     <?= $this->Html->link('', [
                         'plugin' => 'notes',
@@ -61,28 +50,50 @@ if (isset($notesView)) {
                     <?php endif; ?>
                 </span>
             </div>
-            <div class="box-body">
+            <div class="box-body" style="color:initial;">
                 <?= $this->Text->autoParagraph($note->content) ?>
             </div>
             <div class="box-footer small">
                 <?php
                 $relatedLink = [];
-                $url = [];
                 if ($note->has('related_model') && $note->has('related_id')) {
                     try {
-                        $relatedTable = \Cake\ORM\TableRegistry::get($note->related_model);
+                        $relatedTable = TableRegistry::get($note->related_model);
+
+                        $moduleName = Inflector::humanize(Inflector::underscore($relatedTable->alias()));
+
+                        $icon = 'sticky-note-o';
+                        if (method_exists($relatedTable, 'icon')) {
+                            $icon = $relatedTable->icon();
+                        }
+
                         $relatedEntity = $relatedTable->get($note->related_id);
-                        $relatedLink['title'] = \Cake\Utility\Inflector::humanize(
-                            \Cake\Utility\Inflector::underscore($relatedTable->alias())
-                        ) . ' &gt; ';
-                        $relatedLink['title'] .= $relatedEntity->{$relatedTable->displayField()};
+
+                        $relatedLink['icon'] = $icon;
+                        $relatedLink['title'] = $relatedEntity->{$relatedTable->displayField()};
+
+                        $relatedLink['options'] = ['title' => $moduleName, 'escape' => false];
+
+                        $url = [];
                         $url['action'] = 'view';
                         list($url['plugin'], $url['controller']) = pluginSplit($note->related_model);
                         array_push($url, $note->related_id);
-                        $relatedLink['url'] = $this->Url->build($url);
+
+                        $relatedLink['url'] = $url;
                     } catch (\Exception $e) {
                         //
                     }
+                }
+
+                if (!empty($relatedLink)) {
+                    echo $this->Html->tag('i', '', [
+                        'class' => 'text-muted fa fa-' . $relatedLink['icon'],
+                        'title' => $relatedLink['options']['title']
+                    ]);
+                    echo '&nbsp;&nbsp;';
+                    echo $this->Html->link($relatedLink['title'], $relatedLink['url'], $relatedLink['options']);
+                } else {
+                    echo '&nbsp;';
                 }
 
                 echo $this->Html->tag('span', $note->modified->i18nFormat('yyyy-MM-dd HH:mm'), [
@@ -90,13 +101,23 @@ if (isset($notesView)) {
                     'title' => __('Last modified')
                 ]);
                 ?>
-                <?php if (!empty($relatedLink)) : ?>
-                <a href="<?= $relatedLink['url']; ?>"><?= $relatedLink['title']; ?></a>
-                <?php else : ?>
-                    &nbsp;
-                <?php endif; ?>
             </div>
         </div>
-    </div><!--  <?= $k; ?> -->
-    <?php endforeach; ?>
+    </div>
+    <?php
+    if (!$inPluginView) {
+        continue;
+    }
+
+    $pointer = $k + 1;
+    // add clearfix classes
+    foreach ($dividers as $size => $divider) {
+        if (!is_int($pointer / $divider)) {
+            continue;
+        }
+
+        echo $this->Html->tag('div', '', ['class' => 'clearfix visible-' . $size . '-block']);
+    }
+    ?>
+<?php endforeach; ?>
 </div>
