@@ -84,6 +84,11 @@ if (isset($notesView)) {
                         //
                     }
                 }
+
+                echo $this->Html->tag('span', $note->modified->i18nFormat('yyyy-MM-dd HH:mm'), [
+                    'class' => 'pull-right text-muted',
+                    'title' => __('Last modified')
+                ]);
                 ?>
                 <?php if (!empty($relatedLink)) : ?>
                 <a href="<?= $relatedLink['url']; ?>"><?= $relatedLink['title']; ?></a>
