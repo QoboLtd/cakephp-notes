@@ -14,8 +14,10 @@
 
 <section class="content">
 <?php if (!$notes->isEmpty()) : ?>
-    <?= $this->element('Notes.Notes/boxes'); ?>
     <div class="box box-solid">
+        <div class="box-body">
+            <?= $this->element('Notes.Notes/boxes'); ?>
+        </div>
         <div class="box-footer">
             <div class="paginator">
                 <ul class="pagination pagination-sm no-margin pull-right">
