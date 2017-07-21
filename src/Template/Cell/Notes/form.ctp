@@ -1,11 +1,7 @@
 <div class="box box-solid collapsed-box">
-    <div class="box-header with-border">
-        <h3 class="box-title"><?= __('Create Note'); ?></h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                <i class="fa fa-plus"></i>
-            </button>
-        </div>
+    <div class="box-header with-border" data-widget="collapse" style="cursor:pointer;">
+        <i class="pull-right fa fa-plus"></i>
+        <h3 class="box-title" style="font-size:initial;"><?= __('Create Note'); ?></h3>
     </div>
     <?= $this->Form->create(null, ['url' => ['plugin' => 'Notes', 'controller' => 'Notes', 'action' => 'add']]); ?>
     <div class="box-body">
@@ -20,7 +16,7 @@
                 <ul class="fc-color-picker" id="color-chooser">
                 <?php foreach ($types as $k => $v) : ?>
                     <li>
-                        <a class="text-<?= strtolower($v); ?>" href="#" data-value="<?= $k; ?>">
+                        <a class="text-<?= strtolower($v) ?>" href="#" data-value="<?= $k ?>">
                             <i class="fa fa-square"></i>
                         </a>
                     </li>
@@ -33,7 +29,7 @@
                 <ul class="fc-color-picker" id="shared-chooser">
                 <?php foreach ($shared as $k => $v) : ?>
                     <li>
-                        <a class="text-black" href="#" data-value="<?= $k; ?>">
+                        <a class="text-black" href="#" data-value="<?= $k ?>" title="<?= $v['label'] ?>">
                             <i class="fa fa-<?= $v['icon']; ?>"></i>
                         </a>
                     </li>

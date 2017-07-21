@@ -35,7 +35,7 @@ echo $this->Html->scriptBlock(
 <section class="content">
     <div class="row">
         <div class="col-md-6">
-            <div class="box box-default">
+            <div class="box box-solid">
                 <div class="box-header with-border">
                     <h3 class="box-title">&nbsp;</h3>
                 </div>
@@ -50,7 +50,7 @@ echo $this->Html->scriptBlock(
                                     <ul class="fc-color-picker" id="color-chooser">
                                     <?php foreach ($types as $k => $v) : ?>
                                         <li>
-                                            <a class="text-<?= strtolower($v); ?>" href="#" data-value="<?= $k; ?>">
+                                            <a class="text-<?= strtolower($v) ?>" href="#" data-value="<?= $k ?>">
                                                 <i class="fa fa-square"></i>
                                             </a>
                                         </li>
@@ -65,7 +65,7 @@ echo $this->Html->scriptBlock(
                                     <ul class="fc-color-picker" id="shared-chooser">
                                     <?php foreach ($shared as $k => $v) : ?>
                                         <li>
-                                            <a class="text-black" href="#" data-value="<?= $k; ?>">
+                                            <a class="text-black" href="#" data-value="<?= $k ?>" title="<?= $v['label'] ?>">
                                                 <i class="fa fa-<?= $v['icon']; ?>"></i>
                                             </a>
                                         </li>
@@ -83,10 +83,10 @@ echo $this->Html->scriptBlock(
                     ]); ?>
                 </div>
                 <div class="box-footer">
-                    <?= $this->Form->button('<i class="fa fa-eye-slash"></i> ' . __('Submit'), [
-                        'class' => 'btn btn-primary',
-                        'id' => 'add-new-note'
-                    ]); ?>
+                    <?= $this->Form->button(
+                        '<i class="fa fa-' . $shared[$note->shared]['icon'] . '"></i> ' . __('Submit'),
+                        ['class' => 'btn btn-' . $note->type, 'id' => 'add-new-note']
+                    ); ?>
                 </div>
                 <?= $this->Form->end() ?>
             </div>

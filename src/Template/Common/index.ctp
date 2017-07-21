@@ -13,9 +13,8 @@
 </section>
 
 <section class="content">
-    <?php if (!empty($notes)) : ?>
-        <?= $this->element('Notes.Notes/boxes'); ?>
-    <?php endif; ?>
+<?php if (!$notes->isEmpty()) : ?>
+    <?= $this->element('Notes.Notes/boxes'); ?>
     <div class="box box-solid">
         <div class="box-footer">
             <div class="paginator">
@@ -27,4 +26,5 @@
             </div>
         </div>
     </div>
+<?php endif; ?>
 </section>
