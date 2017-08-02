@@ -21,7 +21,7 @@ class NotesTable extends Table
      *
      * @var array
      */
-    protected $_types = [
+    protected $types = [
         'info' => 'Blue',
         'success' => 'Green',
         'warning' => 'Yellow',
@@ -43,7 +43,7 @@ class NotesTable extends Table
      *
      * @var array
      */
-    protected $_shared = [
+    protected $shared = [
         'private' => [
             'label' => 'Private',
             'icon' => 'eye-slash'
@@ -135,7 +135,7 @@ class NotesTable extends Table
      */
     public function getTypes()
     {
-        return $this->_types;
+        return $this->types;
     }
 
     /**
@@ -145,7 +145,7 @@ class NotesTable extends Table
      */
     public function getShared()
     {
-        return $this->_shared;
+        return $this->shared;
     }
 
     /**
