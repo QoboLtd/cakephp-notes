@@ -21,7 +21,7 @@ class NotesTable extends Table
      *
      * @var array
      */
-    protected $_types = [
+    protected $types = [
         'info' => 'Blue',
         'success' => 'Green',
         'warning' => 'Yellow',
@@ -135,7 +135,7 @@ class NotesTable extends Table
      */
     public function getTypes()
     {
-        return $this->_types;
+        return $this->types;
     }
 
     /**
