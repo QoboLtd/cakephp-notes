@@ -7,6 +7,12 @@
 [![License](https://poser.pugx.org/qobo/cakephp-notes/license)](https://packagist.org/packages/qobo/cakephp-notes)
 [![codecov](https://codecov.io/gh/QoboLtd/cakephp-notes/branch/master/graph/badge.svg)](https://codecov.io/gh/QoboLtd/cakephp-notes)
 
+## About
+
+CakePHP 3+ plugin for simple notes attached to other application records.
+
+Developed by [Qobo](https://www.qobo.biz), used in [Qobrix](https://qobrix.com).
+
 ## Installation
 
 You can install this plugin into your CakePHP application using [composer](http://getcomposer.org).
