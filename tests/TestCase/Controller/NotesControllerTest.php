@@ -3,7 +3,7 @@ namespace Notes\Test\TestCase\Controller;
 
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
-use Notes\Controller\NotesController;
+use Cake\Network\Exception\UnauthorizedException;
 
 /**
  * Notes\Controller\NotesController Test Case
@@ -34,6 +34,8 @@ class NotesControllerTest extends IntegrationTestCase
         ]);
 
         $this->enableRetainFlashMessages();
+
+        $this->NotesTable = TableRegistry::get('Notes.Notes');
     }
 
     /**
@@ -114,9 +116,27 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->post('/notes/notes/delete/00000000-0000-0000-0000-000000000001');
-        $this->assertRedirect();
-        $this->post('/notes/notes/delete/00000000-0000-0000-0000-000000000002');
-        $this->assertRedirect();
+        $id = '00000000-0000-0000-0000-000000000001';
+
+        $this->delete('/notes/notes/delete/' . $id);
+
+        $this->assertResponseCode(302);
+
+        $query = $this->NotesTable->find()->where(['id' => '00000000-0000-0000-0000-000000000001']);
+
+        $this->assertTrue($query->isEmpty());
+    }
+
+    /**
+     * Test Unauthorized User delete method
+     *
+     * @return void
+     */
+    public function testDeleteUnauthorizedUser()
+    {
+        $id = '00000000-0000-0000-0000-000000000003';
+        $this->delete('/notes/notes/delete/' . $id);
+        $this->assertResponseError();
+        $this->assertSame(401, $this->_response->getStatusCode());
     }
 }
