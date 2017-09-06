@@ -1,6 +1,7 @@
 <?php
 namespace Notes\Test\TestCase\Controller;
 
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
 use Notes\Controller\NotesController;
 
@@ -20,13 +21,10 @@ class NotesControllerTest extends IntegrationTestCase
         'plugin.notes.users',
     ];
 
-    /**
-     * Test index method
-     *
-     * @return void
-     */
-    public function testIndex()
+    public function setUp()
     {
+        parent::setUp();
+
         $this->session([
             'Auth' => [
                 'User' => [
@@ -34,6 +32,17 @@ class NotesControllerTest extends IntegrationTestCase
                 ],
             ],
         ]);
+
+        $this->enableRetainFlashMessages();
+    }
+
+    /**
+     * Test index method
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
         $this->get('/notes/notes');
         $this->assertResponseOk();
         $this->assertResponseContains('User 1 private note');
@@ -49,15 +58,40 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-        $this->get('/notes/notes/add');
-        $this->assertResponseOk();
+        $data = [
+            'type' => 'success',
+            'user_id' => '00000000-0000-0000-0000-000000000001',
+            'related_model' => 'Foobar',
+            'shared' => 'public',
+            'content' => 'User 1 public note Add',
+        ];
+        $this->post('/notes/notes/add', $data);
+
+        $this->assertResponseSuccess();
+        $this->assertRedirect();
+        $this->assertRedirectContains('/');
+        $this->assertSession('The note has been saved.', 'Flash.flash.0.message');
+    }
+
+    /**
+     * Test AddWrongData method
+     *
+     * @return void
+     */
+    public function testAddWrongData()
+    {
+        $data = [
+            'type' => 'success',
+            'user_id' => '00000000-0000-0000-0000-000000000001',
+            'related_model' => 'Foobar',
+            'shared' => 'public',
+            'content' => 'User 1 public note Add',
+            'related_id' => 'WRONG ID'
+        ];
+        $this->post('/notes/notes/add', $data);
+
+        $this->assertResponseSuccess();
+        $this->assertSession('The note could not be saved. Please, try again.', 'Flash.flash.0.message');
     }
 
     /**
@@ -67,13 +101,6 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
         $this->get('/notes/notes/edit/00000000-0000-0000-0000-000000000001');
         $this->assertResponseOk();
         $this->get('/notes/notes/edit/00000000-0000-0000-0000-000000000002');
@@ -87,13 +114,6 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
         $this->post('/notes/notes/delete/00000000-0000-0000-0000-000000000001');
         $this->assertRedirect();
         $this->post('/notes/notes/delete/00000000-0000-0000-0000-000000000002');
