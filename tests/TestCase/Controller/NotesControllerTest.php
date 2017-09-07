@@ -102,10 +102,36 @@ class NotesControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->get('/notes/notes/edit/00000000-0000-0000-0000-000000000001');
-        $this->assertResponseOk();
-        $this->get('/notes/notes/edit/00000000-0000-0000-0000-000000000002');
-        $this->assertResponseOk();
+        $id = '00000000-0000-0000-0000-000000000001';
+
+        $data = [
+            'shared' => 'private',
+        ];
+
+        $this->post('/notes/notes/edit/' . $id, $data);
+        $this->assertResponseSuccess();
+
+        // fetch modified record
+        $entity = TableRegistry::get('Notes')->get($id);
+        $this->assertEquals($data['shared'], $entity->shared);
+    }
+
+    /**
+     * Test edit unauthorized data
+     *
+     * @return void
+     */
+    public function testEditUnauthorized()
+    {
+        $id = '00000000-0000-0000-0000-000000000003';
+
+        $data = [
+            'shared' => 'private',
+        ];
+
+        $this->post('/notes/notes/edit/' . $id, $data);
+        $this->assertResponseError();
+        $this->assertSame(401, $this->_response->getStatusCode());
     }
 
     /**
