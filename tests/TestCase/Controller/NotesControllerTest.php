@@ -3,7 +3,6 @@ namespace Notes\Test\TestCase\Controller;
 
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
-use Cake\Network\Exception\UnauthorizedException;
 
 /**
  * Notes\Controller\NotesController Test Case
