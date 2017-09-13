@@ -86,10 +86,11 @@ if ($inPluginView) {
                 }
 
                 if (!empty($relatedLink)) {
-                    echo $this->Html->tag('i', '', [
-                        'class' => 'text-muted fa fa-' . $relatedLink['icon'],
+                    $htmlIcon = $this->Html->tag('i', '', [
+                        'class' => 'fa fa-' . $relatedLink['icon'],
                         'title' => $relatedLink['options']['title']
                     ]);
+                    echo $this->Html->link($htmlIcon, $relatedLink['url'], $relatedLink['options']);
                     echo '&nbsp;&nbsp;';
                     echo $this->Html->link($relatedLink['title'], $relatedLink['url'], $relatedLink['options']);
                 } else {
