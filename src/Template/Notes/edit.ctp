@@ -22,7 +22,7 @@ echo $this->Html->scriptBlock(
         // add value to "type" input
         $("[name=\'Notes[shared]\']").val(currValue);
     });',
-    ['block' => 'scriptBotton']
+    ['block' => 'scriptBottom']
 );
 ?>
 <section class="content-header">
