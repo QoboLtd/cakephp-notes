@@ -26,7 +26,7 @@
 
 <section class="content">
 <?php if (!$notes->isEmpty()) : ?>
-    <div class="box box-solid">
+    <div class="box box-primary">
         <div class="box-body">
             <?= $this->element('Notes.Notes/boxes'); ?>
         </div>
