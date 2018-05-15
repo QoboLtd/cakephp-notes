@@ -45,22 +45,12 @@ class NotesCell extends Cell
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
         $notes = $this->Notes->find('all')
-            ->contain([
-                'Users'
-            ])
-            ->where([
-                'Notes.user_id' => $currentUser['id']
-            ])
-            ->orWhere([
-                'Notes.shared' => $this->Notes->getPublicShared()
-            ])
-            ->andWhere([
-                'Notes.related_model' => $relatedModel,
-                'Notes.related_id' => $relatedId
-            ])
-            ->order([
-                'Notes.modified' => 'DESC'
-            ])->all();
+            ->contain(['Users'])
+            ->where(['Notes.user_id' => $currentUser['id']])
+            ->orWhere(['Notes.shared' => $this->Notes->getPublicShared()])
+            ->andWhere(['Notes.related_model' => $relatedModel, 'Notes.related_id' => $relatedId])
+            ->order(['Notes.modified' => 'DESC'])
+            ->all();
 
         $this->set(compact('relatedModel', 'relatedId', 'types', 'shared', 'notes'));
     }

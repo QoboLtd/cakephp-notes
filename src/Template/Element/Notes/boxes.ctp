@@ -36,7 +36,7 @@ if ($inPluginView) {
         <div class="box box-<?= $note->type ?> box-solid note">
             <div class="box-header with-border">
                 <span class="fa fa-<?= $shared[$note->shared]['icon'] ?>" aria-hidden="true" title="<?= $shared[$note->shared]['label'] ?>"></span>
-                <strong title="Author"><?= $note->user->username ?></strong>
+                <strong title="Author"><?= $note->get('user') ? $note->get('user')->get('username') : '' ?></strong>
                 <span class="actions pull-right">
                     <?php if ($this->request->session()->read('Auth.User.id') === $note->user_id) : ?>
                     <?= $this->Html->link('', [
