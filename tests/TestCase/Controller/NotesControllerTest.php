@@ -112,7 +112,7 @@ class NotesControllerTest extends IntegrationTestCase
         $this->assertResponseSuccess();
 
         // fetch modified record
-        $entity = TableRegistry::get('Notes')->get($id);
+        $entity = $this->NotesTable->get($id);
         $this->assertEquals($data['shared'], $entity->shared);
     }
 
