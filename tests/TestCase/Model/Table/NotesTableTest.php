@@ -52,7 +52,7 @@ class NotesTableTest extends TestCase
         parent::tearDown();
     }
 
-    public function testValidationDefault()
+    public function testValidationDefault(): void
     {
         $validator = new \Cake\Validation\Validator();
         $result = $this->Notes->validationDefault($validator);
@@ -71,7 +71,7 @@ class NotesTableTest extends TestCase
         $this->assertEmpty($entity->getErrors());
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $data = [
             'type' => 'success',
@@ -86,7 +86,7 @@ class NotesTableTest extends TestCase
         $this->assertNotEmpty($result->get('id'));
     }
 
-    public function testGetTypes()
+    public function testGetTypes(): void
     {
         $result = $this->Notes->getTypes();
         $this->assertTrue(is_array($result), "getTypes() returns a non-array");
@@ -97,7 +97,7 @@ class NotesTableTest extends TestCase
         $this->assertArrayHasKey('success', $result, "'success' is not in returned types");
     }
 
-    public function testGetShared()
+    public function testGetShared(): void
     {
         $result = $this->Notes->getShared();
         $this->assertTrue(is_array($result), "getShared() returns a non-array");
@@ -106,13 +106,13 @@ class NotesTableTest extends TestCase
         $this->assertArrayHasKey('public', $result, "'Public' is not in returned shared values");
     }
 
-    public function testGetPublicShared()
+    public function testGetPublicShared(): void
     {
         $result = $this->Notes->getPublicShared();
         $this->assertEquals('public', $result);
     }
 
-    public function testGetPrivateShared()
+    public function testGetPrivateShared(): void
     {
         $result = $this->Notes->getPrivateShared();
         $this->assertEquals('private', $result);

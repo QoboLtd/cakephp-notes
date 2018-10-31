@@ -42,7 +42,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testIndex(): void
     {
         $this->get('/notes/notes');
         $this->assertResponseOk();
@@ -57,7 +57,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testAdd()
+    public function testAdd(): void
     {
         $data = [
             'type' => 'success',
@@ -79,7 +79,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testAddWrongData()
+    public function testAddWrongData(): void
     {
         $data = [
             'type' => 'success',
@@ -100,7 +100,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testEdit()
+    public function testEdit(): void
     {
         $id = '00000000-0000-0000-0000-000000000001';
 
@@ -121,7 +121,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testEditUnauthorized()
+    public function testEditUnauthorized(): void
     {
         $id = '00000000-0000-0000-0000-000000000003';
 
@@ -139,7 +139,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         $id = '00000000-0000-0000-0000-000000000001';
 
@@ -157,7 +157,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDeleteUnauthorizedUser()
+    public function testDeleteUnauthorizedUser(): void
     {
         $id = '00000000-0000-0000-0000-000000000003';
         $this->delete('/notes/notes/delete/' . $id);
