@@ -68,7 +68,7 @@ class NotesTableTest extends TestCase
 
         $entity = $this->Notes->newEntity($data);
 
-        $this->assertEmpty($entity->errors());
+        $this->assertEmpty($entity->getErrors());
     }
 
     public function testSave()

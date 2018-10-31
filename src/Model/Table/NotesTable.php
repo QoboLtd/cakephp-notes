@@ -74,8 +74,8 @@ class NotesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('qobo_notes');
-        $this->primaryKey('id');
+        $this->setTable('qobo_notes');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
         $this->addBehavior('Muffin/Trash.Trash');
