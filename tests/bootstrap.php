@@ -6,7 +6,7 @@ use Cake\Filesystem\Folder;
 
 $pluginName = 'Notes';
 if (empty($pluginName)) {
-    throw new \Exception("Plugin name is not configured");
+    throw new \RuntimeException("Plugin name is not configured");
 }
 
 $findRoot = function () {
@@ -25,7 +25,7 @@ $findRoot = function () {
         return $root;
     }
 
-    throw new \Exception("Failed to find CakePHP");
+    throw new \RuntimeException("Failed to find CakePHP");
 };
 
 if (!defined('DS')) {
@@ -83,7 +83,7 @@ $cache = [
     ]
 ];
 
-Cake\Cache\Cache::config($cache);
+Cake\Cache\Cache::setConfig($cache);
 Cake\Core\Configure::write('Session', [
     'defaults' => 'php'
 ]);
@@ -93,13 +93,13 @@ if (!getenv('db_dsn')) {
     putenv('db_dsn=sqlite:///:memory:');
 }
 
-Cake\Datasource\ConnectionManager::config('default', [
+Cake\Datasource\ConnectionManager::setConfig('default', [
     'url' => getenv('db_dsn'),
     'quoteIdentifiers' => true,
     'timezone' => 'UTC'
 ]);
 
-Cake\Datasource\ConnectionManager::config('test', [
+Cake\Datasource\ConnectionManager::setConfig('test', [
     'url' => getenv('db_dsn'),
     'quoteIdentifiers' => true,
     'timezone' => 'UTC'
