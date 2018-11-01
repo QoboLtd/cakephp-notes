@@ -37,7 +37,11 @@ class NotesTableTest extends TestCase
     {
         parent::setUp();
         $config = TableRegistry::exists('Notes') ? [] : ['className' => 'Notes\Model\Table\NotesTable'];
-        $this->Notes = TableRegistry::get('Notes', $config);
+        /**
+         * @var \Notes\Model\Table\NotesTable $notes
+         */
+        $notes = TableRegistry::get('Notes', $config);
+        $this->Notes = $notes;
     }
 
     /**
@@ -81,6 +85,9 @@ class NotesTableTest extends TestCase
         ];
 
         $entity = $this->Notes->newEntity($data);
+        /**
+         * @var \Notes\Model\Entity\Note $result
+         */
         $result = $this->Notes->save($entity);
 
         $this->assertNotEmpty($result->get('id'));

@@ -6,6 +6,8 @@ use Cake\TestSuite\IntegrationTestCase;
 
 /**
  * Notes\Controller\NotesController Test Case
+ *
+ * @property \Notes\Model\Table\NotesTable $NotesTable
  */
 class NotesControllerTest extends IntegrationTestCase
 {
@@ -34,7 +36,11 @@ class NotesControllerTest extends IntegrationTestCase
 
         $this->enableRetainFlashMessages();
 
-        $this->NotesTable = TableRegistry::get('Notes.Notes');
+        /**
+         * @var \Notes\Model\Table\NotesTable $table
+         */
+        $table = TableRegistry::get('Notes.Notes');
+        $this->NotesTable = $table;
     }
 
     /**
@@ -111,7 +117,9 @@ class NotesControllerTest extends IntegrationTestCase
         $this->post('/notes/notes/edit/' . $id, $data);
         $this->assertResponseSuccess();
 
-        // fetch modified record
+        /**
+         * @var \Notes\Model\Entity\Note $entity Modified record
+         */
         $entity = $this->NotesTable->get($id);
         $this->assertEquals($data['shared'], $entity->shared);
     }
