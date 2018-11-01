@@ -24,20 +24,17 @@ class NotesController extends AppController
     /**
      * My notes method
      *
-     * @return void
+     * @return \Cake\Http\Response|void|null
      */
     public function myNotes()
     {
+        /**
+         * @var \Cake\ORM\Query $notes
+         */
         $notes = $this->Notes->find('all')
-            ->contain([
-                'Users'
-            ])
-            ->where([
-                'Notes.user_id' => $this->Auth->user('id')
-            ])
-            ->order([
-                'Notes.modified' => 'DESC'
-            ]);
+            ->where(['Notes.user_id' => $this->Auth->user('id')])
+            ->order(['Notes.modified' => 'DESC'])
+            ->contain(['Users']);
 
         $notes = $this->paginate($notes);
         $types = $this->Notes->getTypes();
@@ -50,23 +47,22 @@ class NotesController extends AppController
     /**
      * Index method
      *
-     * @return void
+     * @return \Cake\Http\Response|void|null
      */
     public function index()
     {
+        /**
+         * @var \Cake\ORM\Query $notes
+         */
         $notes = $this->Notes->find('all')
-            ->contain([
-                'Users'
-            ])
             ->where([
-                'Notes.user_id' => $this->Auth->user('id')
+                'OR' => [
+                    'Notes.user_id' => $this->Auth->user('id'),
+                    'Notes.shared' => $this->Notes->getPublicShared()
+                ]
             ])
-            ->orWhere([
-                'Notes.shared' => $this->Notes->getPublicShared()
-            ])
-            ->order([
-                'Notes.modified' => 'DESC'
-            ]);
+            ->order(['Notes.modified' => 'DESC'])
+            ->contain(['Users']);
 
         $notes = $this->paginate($notes);
         $types = $this->Notes->getTypes();
@@ -79,26 +75,26 @@ class NotesController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|void|null Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
         $note = $this->Notes->newEntity();
         if ($this->request->is('post')) {
-            $data = $this->request->data;
+            $data = $this->request->getData();
             $data['user_id'] = $this->Auth->user('id');
             $note = $this->Notes->patchEntity($note, $data);
             if ($this->Notes->save($note)) {
-                $this->Flash->success(__('The note has been saved.'));
+                $this->Flash->success((string)__('The note has been saved.'));
                 $redirectUrl = $this->referer();
                 // @todo handle this better, probably get rid of add View and redirect always back to referer
-                if (\Cake\Routing\Router::url('/', true) . $this->request->url === $this->referer()) {
+                if (\Cake\Routing\Router::url('/', true) . $this->request->getPath() === $this->referer()) {
                     $this->redirect(['action' => 'my-notes']);
                 }
 
                 return $this->redirect($redirectUrl);
             } else {
-                $this->Flash->error(__('The note could not be saved. Please, try again.'));
+                $this->Flash->error((string)__('The note could not be saved. Please, try again.'));
             }
         }
         $types = $this->Notes->getTypes();
@@ -116,6 +112,9 @@ class NotesController extends AppController
      */
     public function edit(string $id = null)
     {
+        /**
+         * @var \Notes\Model\Entity\Note $note
+         */
         $note = $this->Notes->get($id, [
             'contain' => []
         ]);
@@ -128,12 +127,13 @@ class NotesController extends AppController
         }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $note = $this->Notes->patchEntity($note, $this->request->data);
+            $data = is_array($this->request->getData()) ? $this->request->getData() : [];
+            $note = $this->Notes->patchEntity($note, $data);
             if ($this->Notes->save($note)) {
-                $this->Flash->success(__('The note has been saved.'));
+                $this->Flash->success((string)__('The note has been saved.'));
                 $this->redirect(['action' => 'my-notes']);
             } else {
-                $this->Flash->error(__('The note could not be saved. Please, try again.'));
+                $this->Flash->error((string)__('The note could not be saved. Please, try again.'));
             }
         }
         $types = $this->Notes->getTypes();
@@ -146,12 +146,15 @@ class NotesController extends AppController
      * Delete method
      *
      * @param string|null $id Note id.
-     * @return \Cake\Http\Response|null Redirects to index.
+     * @return \Cake\Http\Response|void|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete(string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        /**
+         * @var \Notes\Model\Entity\Note $note
+         */
         $note = $this->Notes->get($id);
 
         /*
@@ -162,9 +165,9 @@ class NotesController extends AppController
         }
 
         if ($this->Notes->delete($note)) {
-            $this->Flash->success(__('The note has been deleted.'));
+            $this->Flash->success((string)__('The note has been deleted.'));
         } else {
-            $this->Flash->error(__('The note could not be deleted. Please, try again.'));
+            $this->Flash->error((string)__('The note could not be deleted. Please, try again.'));
         }
 
         return $this->redirect($this->request->referer());

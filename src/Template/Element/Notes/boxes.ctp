@@ -15,7 +15,7 @@ use Cake\Utility\Inflector;
 
 echo $this->Html->css('Notes.notes', ['block' => 'css']);
 
-$inPluginView = 'Notes' === $this->request->param('plugin');
+$inPluginView = 'Notes' === $this->request->getParam('plugin');
 // set viewport widths
 if ($inPluginView) {
     $viewport = ['lg' => 2, 'md' => 3, 'sm' => 4, 'xs' => 6];
@@ -38,7 +38,7 @@ if ($inPluginView) {
                 <span class="fa fa-<?= $shared[$note->shared]['icon'] ?>" aria-hidden="true" title="<?= $shared[$note->shared]['label'] ?>"></span>
                 <strong title="Author"><?= $note->get('user') ? $note->get('user')->get('username') : '' ?></strong>
                 <span class="actions pull-right">
-                <?php if ($this->request->session()->read('Auth.User.id') === $note->user_id) : ?>
+                <?php if ($this->request->getSession()->read('Auth.User.id') === $note->user_id) : ?>
                     <?= $this->Html->link('', [
                         'plugin' => 'notes',
                         'controller' => 'notes',

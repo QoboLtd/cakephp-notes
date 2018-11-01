@@ -49,13 +49,22 @@ class NotesCell extends Cell
         $this->loadModel('Notes.Notes');
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
+        /**
+         * @var \Cake\ORM\Query $notes
+         */
         $notes = $this->Notes->find('all')
-            ->contain(['Users'])
-            ->where(['Notes.user_id' => $currentUser['id']])
-            ->orWhere(['Notes.shared' => $this->Notes->getPublicShared()])
-            ->andWhere(['Notes.related_model' => $relatedModel, 'Notes.related_id' => $relatedId])
+            ->where([
+                'AND' => [
+                    ['Notes.related_model' => $relatedModel, 'Notes.related_id' => $relatedId],
+                    'OR' => [
+                        ['Notes.user_id' => $currentUser['id']],
+                        ['Notes.shared' => $this->Notes->getPublicShared()]
+                    ]
+                ]
+            ])
             ->order(['Notes.modified' => 'DESC'])
-            ->all();
+            ->contain(['Users']);
+        $notes = $notes->all();
 
         $this->set(compact('relatedModel', 'relatedId', 'types', 'shared', 'notes'));
     }

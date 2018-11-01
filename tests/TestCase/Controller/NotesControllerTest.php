@@ -1,6 +1,7 @@
 <?php
 namespace Notes\Test\TestCase\Controller;
 
+use Cake\Http\Response;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
 
@@ -139,7 +140,10 @@ class NotesControllerTest extends IntegrationTestCase
 
         $this->post('/notes/notes/edit/' . $id, $data);
         $this->assertResponseError();
-        $this->assertSame(401, $this->_response->getStatusCode());
+        $this->assertTrue(is_object($this->_response), "Response is not an object");
+        if ($this->_response instanceof Response) {
+            $this->assertSame(401, $this->_response->getStatusCode());
+        }
     }
 
     /**
@@ -170,6 +174,9 @@ class NotesControllerTest extends IntegrationTestCase
         $id = '00000000-0000-0000-0000-000000000003';
         $this->delete('/notes/notes/delete/' . $id);
         $this->assertResponseError();
-        $this->assertSame(401, $this->_response->getStatusCode());
+        $this->assertTrue(is_object($this->_response), "Response is not an object");
+        if ($this->_response instanceof Response) {
+            $this->assertSame(401, $this->_response->getStatusCode());
+        }
     }
 }
