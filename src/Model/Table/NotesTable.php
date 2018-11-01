@@ -74,8 +74,8 @@ class NotesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('qobo_notes');
-        $this->primaryKey('id');
+        $this->setTable('qobo_notes');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
         $this->addBehavior('Muffin/Trash.Trash');
@@ -141,9 +141,9 @@ class NotesTable extends Table
     /**
      * Returns Notes types.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function getTypes()
+    public function getTypes(): array
     {
         return $this->types;
     }
@@ -151,9 +151,9 @@ class NotesTable extends Table
     /**
      * Returns Notes shared options.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function getShared()
+    public function getShared(): array
     {
         return $this->shared;
     }
@@ -163,7 +163,7 @@ class NotesTable extends Table
      *
      * @return string
      */
-    public function getPublicShared()
+    public function getPublicShared(): string
     {
         return static::SHARED_PUBLIC;
     }
@@ -173,7 +173,7 @@ class NotesTable extends Table
      *
      * @return string
      */
-    public function getPrivateShared()
+    public function getPrivateShared(): string
     {
         return static::SHARED_PRIVATE;
     }

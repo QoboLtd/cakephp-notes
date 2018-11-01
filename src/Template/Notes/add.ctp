@@ -86,7 +86,7 @@ echo $this->Html->scriptBlock(
                             </div>
                         </div>
                     </div>
-                    <?= $this->Form->input('Notes.content', [
+                    <?= $this->Form->control('Notes.content', [
                         'type' => 'textarea',
                         'label' => false,
                         'required' => true,

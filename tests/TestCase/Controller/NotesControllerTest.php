@@ -1,11 +1,14 @@
 <?php
 namespace Notes\Test\TestCase\Controller;
 
+use Cake\Http\Response;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
  * Notes\Controller\NotesController Test Case
+ *
+ * @property \Notes\Model\Table\NotesTable $NotesTable
  */
 class NotesControllerTest extends IntegrationTestCase
 {
@@ -34,7 +37,11 @@ class NotesControllerTest extends IntegrationTestCase
 
         $this->enableRetainFlashMessages();
 
-        $this->NotesTable = TableRegistry::get('Notes.Notes');
+        /**
+         * @var \Notes\Model\Table\NotesTable $table
+         */
+        $table = TableRegistry::get('Notes.Notes');
+        $this->NotesTable = $table;
     }
 
     /**
@@ -42,7 +49,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testIndex(): void
     {
         $this->get('/notes/notes');
         $this->assertResponseOk();
@@ -57,7 +64,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testAdd()
+    public function testAdd(): void
     {
         $data = [
             'type' => 'success',
@@ -79,7 +86,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testAddWrongData()
+    public function testAddWrongData(): void
     {
         $data = [
             'type' => 'success',
@@ -100,7 +107,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testEdit()
+    public function testEdit(): void
     {
         $id = '00000000-0000-0000-0000-000000000001';
 
@@ -111,7 +118,9 @@ class NotesControllerTest extends IntegrationTestCase
         $this->post('/notes/notes/edit/' . $id, $data);
         $this->assertResponseSuccess();
 
-        // fetch modified record
+        /**
+         * @var \Notes\Model\Entity\Note $entity Modified record
+         */
         $entity = $this->NotesTable->get($id);
         $this->assertEquals($data['shared'], $entity->shared);
     }
@@ -121,7 +130,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testEditUnauthorized()
+    public function testEditUnauthorized(): void
     {
         $id = '00000000-0000-0000-0000-000000000003';
 
@@ -131,7 +140,10 @@ class NotesControllerTest extends IntegrationTestCase
 
         $this->post('/notes/notes/edit/' . $id, $data);
         $this->assertResponseError();
-        $this->assertSame(401, $this->_response->getStatusCode());
+        $this->assertTrue(is_object($this->_response), "Response is not an object");
+        if ($this->_response instanceof Response) {
+            $this->assertSame(401, $this->_response->getStatusCode());
+        }
     }
 
     /**
@@ -139,7 +151,7 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         $id = '00000000-0000-0000-0000-000000000001';
 
@@ -157,11 +169,14 @@ class NotesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDeleteUnauthorizedUser()
+    public function testDeleteUnauthorizedUser(): void
     {
         $id = '00000000-0000-0000-0000-000000000003';
         $this->delete('/notes/notes/delete/' . $id);
         $this->assertResponseError();
-        $this->assertSame(401, $this->_response->getStatusCode());
+        $this->assertTrue(is_object($this->_response), "Response is not an object");
+        if ($this->_response instanceof Response) {
+            $this->assertSame(401, $this->_response->getStatusCode());
+        }
     }
 }

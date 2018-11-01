@@ -13,6 +13,11 @@ namespace Notes\View\Cell;
 
 use Cake\View\Cell;
 
+/**
+ * Notes Cell
+ *
+ * @property \Notes\Model\Table\NotesTable $Notes
+ */
 class NotesCell extends Cell
 {
     /**
@@ -22,7 +27,7 @@ class NotesCell extends Cell
      * @param  string $relatedId related record id
      * @return void
      */
-    public function form($relatedModel, $relatedId)
+    public function form(string $relatedModel, string $relatedId): void
     {
         $currentUser = $this->request->session()->read('Auth.User');
         $this->loadModel('Notes.Notes');
@@ -38,19 +43,28 @@ class NotesCell extends Cell
      * @param  string $relatedId related record id
      * @return void
      */
-    public function listing($relatedModel, $relatedId)
+    public function listing(string $relatedModel, string $relatedId): void
     {
         $currentUser = $this->request->session()->read('Auth.User');
         $this->loadModel('Notes.Notes');
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
+        /**
+         * @var \Cake\ORM\Query $notes
+         */
         $notes = $this->Notes->find('all')
-            ->contain(['Users'])
-            ->where(['Notes.user_id' => $currentUser['id']])
-            ->orWhere(['Notes.shared' => $this->Notes->getPublicShared()])
-            ->andWhere(['Notes.related_model' => $relatedModel, 'Notes.related_id' => $relatedId])
+            ->where([
+                'AND' => [
+                    ['Notes.related_model' => $relatedModel, 'Notes.related_id' => $relatedId],
+                    'OR' => [
+                        ['Notes.user_id' => $currentUser['id']],
+                        ['Notes.shared' => $this->Notes->getPublicShared()]
+                    ]
+                ]
+            ])
             ->order(['Notes.modified' => 'DESC'])
-            ->all();
+            ->contain(['Users']);
+        $notes = $notes->all();
 
         $this->set(compact('relatedModel', 'relatedId', 'types', 'shared', 'notes'));
     }
