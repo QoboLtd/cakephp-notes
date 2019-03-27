@@ -45,7 +45,7 @@ class NotesCell extends Cell
      */
     public function listing(string $relatedModel, string $relatedId): void
     {
-        $currentUser = $this->request->session()->read('Auth.User');
+        $currentUser = (array)$this->request->session()->read('Auth.User');
         $this->loadModel('Notes.Notes');
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
