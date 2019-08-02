@@ -10,13 +10,14 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$relatedId = null;
-if (isset($this->request->params['pass']) && !empty($this->request->params['pass'][0])) {
-    $relatedId = $this->request->params['pass'][0];
+$relatedId = $this->request->getParam('pass.0');
+if (! $relatedId) {
+    return;
 }
-$relatedModel = $this->request->controller;
-if ($this->request->plugin) {
-    $relatedModel = $this->request->plugin . '.' . $relatedModel;
+
+$relatedModel = $this->request->getParam('controller');
+if ($this->request->getParam('plugin')) {
+    $relatedModel = $this->request->getParam('plugin') . '.' . $relatedModel;
 }
 
 echo $this->cell('Notes.Notes::listing', [

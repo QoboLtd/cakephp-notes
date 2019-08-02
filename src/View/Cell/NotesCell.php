@@ -29,7 +29,7 @@ class NotesCell extends Cell
      */
     public function form(string $relatedModel, string $relatedId): void
     {
-        $currentUser = $this->request->session()->read('Auth.User');
+        $currentUser = $this->request->getSession()->read('Auth.User');
         $this->loadModel('Notes.Notes');
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();
@@ -45,7 +45,7 @@ class NotesCell extends Cell
      */
     public function listing(string $relatedModel, string $relatedId): void
     {
-        $currentUser = (array)$this->request->session()->read('Auth.User');
+        $currentUser = (array)$this->request->getSession()->read('Auth.User');
         $this->loadModel('Notes.Notes');
         $types = $this->Notes->getTypes();
         $shared = $this->Notes->getShared();

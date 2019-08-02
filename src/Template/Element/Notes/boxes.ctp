@@ -71,7 +71,7 @@ if ($inPluginView) {
                     try {
                         $relatedTable = TableRegistry::get($note->related_model);
 
-                        $moduleName = Inflector::humanize(Inflector::underscore($relatedTable->alias()));
+                        $moduleName = Inflector::humanize(Inflector::underscore($relatedTable->getAlias()));
 
                         $icon = 'sticky-note-o';
                         if (method_exists($relatedTable, 'icon')) {
@@ -81,7 +81,7 @@ if ($inPluginView) {
                         $relatedEntity = $relatedTable->get($note->related_id);
 
                         $relatedLink['icon'] = $icon;
-                        $relatedLink['title'] = $relatedEntity->{$relatedTable->displayField()};
+                        $relatedLink['title'] = $relatedEntity->{$relatedTable->getDisplayField()};
 
                         $relatedLink['options'] = ['title' => $moduleName, 'escape' => false];
 
