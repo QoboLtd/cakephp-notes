@@ -36,6 +36,7 @@ class NotesCell extends Cell
 
         $this->set(compact('relatedModel', 'relatedId', 'types', 'shared'));
     }
+
     /**
      * Pass record specific notes to the View, based on current user and visibility.
      *
