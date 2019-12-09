@@ -59,9 +59,9 @@ class NotesCell extends Cell
                     ['Notes.related_model' => $relatedModel, 'Notes.related_id' => $relatedId],
                     'OR' => [
                         ['Notes.user_id' => $currentUser['id']],
-                        ['Notes.shared' => $this->Notes->getPublicShared()]
-                    ]
-                ]
+                        ['Notes.shared' => $this->Notes->getPublicShared()],
+                    ],
+                ],
             ])
             ->order(['Notes.modified' => 'DESC'])
             ->contain(['Users']);

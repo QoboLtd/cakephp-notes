@@ -35,7 +35,7 @@ class NotesTable extends Table
         'info' => 'Blue',
         'success' => 'Green',
         'warning' => 'Yellow',
-        'danger' => 'Red'
+        'danger' => 'Red',
     ];
 
     /**
@@ -56,12 +56,12 @@ class NotesTable extends Table
     protected $shared = [
         'private' => [
             'label' => 'Private',
-            'icon' => 'eye-slash'
+            'icon' => 'eye-slash',
         ],
         'public' => [
             'label' => 'Public',
-            'icon' => 'eye'
-        ]
+            'icon' => 'eye',
+        ],
     ];
 
     /**
@@ -82,7 +82,7 @@ class NotesTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'className' => 'CakeDC/Users.Users'
+            'className' => 'CakeDC/Users.Users',
         ]);
     }
 
