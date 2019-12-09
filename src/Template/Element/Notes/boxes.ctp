@@ -45,7 +45,7 @@ if ($inPluginView) {
                         'action' => 'edit',
                         $note->id
                     ], [
-                        'title' => __('Edit'),
+                        'title' => __d('Qobo/Notes', 'Edit'),
                         'class' => 'fa fa-pencil'
                     ]) ?>
                     <?= $this->Form->postLink('', [
@@ -54,8 +54,8 @@ if ($inPluginView) {
                         'action' => 'delete',
                         $note->id
                     ], [
-                        'confirm' => __('Are you sure you want to delete # {0}?', $note->id),
-                        'title' => __('Delete'),
+                        'confirm' => __d('Qobo/Notes', 'Are you sure you want to delete # {0}?', $note->id),
+                        'title' => __d('Qobo/Notes', 'Delete'),
                         'class' => 'fa fa-trash'
                     ]) ?>
                 <?php endif; ?>
@@ -110,7 +110,7 @@ if ($inPluginView) {
 
                 echo $this->Html->tag('span', $note->modified->i18nFormat('yyyy-MM-dd HH:mm'), [
                     'class' => 'pull-right text-muted',
-                    'title' => __('Last modified')
+                    'title' => __d('Qobo/Notes', 'Last modified')
                 ]);
                 ?>
             </div>

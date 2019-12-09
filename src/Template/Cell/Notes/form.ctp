@@ -13,7 +13,7 @@
 <div class="box box-solid collapsed-box">
     <div class="box-header with-border" data-widget="collapse" style="cursor:pointer;">
         <i class="pull-right fa fa-plus"></i>
-        <h3 class="box-title" style="font-size:initial;"><?= __('Create Note'); ?></h3>
+        <h3 class="box-title" style="font-size:initial;"><?= __d('Qobo/Notes', 'Create Note'); ?></h3>
     </div>
     <?= $this->Form->create(null, ['url' => ['plugin' => 'Notes', 'controller' => 'Notes', 'action' => 'add']]); ?>
     <div class="box-body">
@@ -59,7 +59,7 @@
     </div>
     <div class="box-footer">
         <div class="pull-right">
-            <?= $this->Form->button('<i class="fa fa-eye-slash"></i> ' . __('Add'), [
+            <?= $this->Form->button('<i class="fa fa-eye-slash"></i> ' . __d('Qobo/Notes', 'Add'), [
                 'class' => 'btn btn-primary',
                 'id' => 'add-new-note'
             ]); ?>

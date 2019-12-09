@@ -85,7 +85,7 @@ class NotesController extends AppController
             $data['user_id'] = $this->Auth->user('id');
             $note = $this->Notes->patchEntity($note, $data);
             if ($this->Notes->save($note)) {
-                $this->Flash->success((string)__('The note has been saved.'));
+                $this->Flash->success((string)__d('Qobo/Notes', 'The note has been saved.'));
                 $redirectUrl = $this->referer();
                 // @todo handle this better, probably get rid of add View and redirect always back to referer
                 if (\Cake\Routing\Router::url('/', true) . $this->request->getPath() === $this->referer()) {
@@ -94,7 +94,7 @@ class NotesController extends AppController
 
                 return $this->redirect($redirectUrl);
             } else {
-                $this->Flash->error((string)__('The note could not be saved. Please, try again.'));
+                $this->Flash->error((string)__d('Qobo/Notes', 'The note could not be saved. Please, try again.'));
             }
         }
         $types = $this->Notes->getTypes();
@@ -130,10 +130,10 @@ class NotesController extends AppController
             $data = is_array($this->request->getData()) ? $this->request->getData() : [];
             $note = $this->Notes->patchEntity($note, $data);
             if ($this->Notes->save($note)) {
-                $this->Flash->success((string)__('The note has been saved.'));
+                $this->Flash->success((string)__d('Qobo/Notes', 'The note has been saved.'));
                 $this->redirect(['action' => 'my-notes']);
             } else {
-                $this->Flash->error((string)__('The note could not be saved. Please, try again.'));
+                $this->Flash->error((string)__d('Qobo/Notes', 'The note could not be saved. Please, try again.'));
             }
         }
         $types = $this->Notes->getTypes();
@@ -165,9 +165,9 @@ class NotesController extends AppController
         }
 
         if ($this->Notes->delete($note)) {
-            $this->Flash->success((string)__('The note has been deleted.'));
+            $this->Flash->success((string)__d('Qobo/Notes', 'The note has been deleted.'));
         } else {
-            $this->Flash->error((string)__('The note could not be deleted. Please, try again.'));
+            $this->Flash->error((string)__d('Qobo/Notes', 'The note could not be deleted. Please, try again.'));
         }
 
         return $this->redirect($this->request->referer());
