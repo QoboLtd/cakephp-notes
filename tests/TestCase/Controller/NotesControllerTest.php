@@ -94,7 +94,7 @@ class NotesControllerTest extends IntegrationTestCase
             'related_model' => 'Foobar',
             'shared' => 'public',
             'content' => 'User 1 public note Add',
-            'related_id' => 'WRONG ID'
+            'related_id' => 'WRONG ID',
         ];
         $this->post('/notes/notes/add', $data);
 

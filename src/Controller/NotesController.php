@@ -58,8 +58,8 @@ class NotesController extends AppController
             ->where([
                 'OR' => [
                     'Notes.user_id' => $this->Auth->user('id'),
-                    'Notes.shared' => $this->Notes->getPublicShared()
-                ]
+                    'Notes.shared' => $this->Notes->getPublicShared(),
+                ],
             ])
             ->order(['Notes.modified' => 'DESC'])
             ->contain(['Users']);
@@ -116,7 +116,7 @@ class NotesController extends AppController
          * @var \Notes\Model\Entity\Note $note
          */
         $note = $this->Notes->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
 
         /*
