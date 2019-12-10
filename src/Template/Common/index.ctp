@@ -15,9 +15,9 @@
         <div class="pull-right">
             <div class="btn-group btn-group-sm" role="group">
             <?= $this->Html->link(
-                '<i class="fa fa-plus"></i> ' . __('Add'),
+                '<i class="fa fa-plus"></i> ' . __d('Qobo/Notes', 'Add'),
                 ['plugin' => 'Notes', 'controller' => 'Notes', 'action' => 'add'],
-                ['escape' => false, 'title' => __('Add'), 'class' => 'btn btn-default']
+                ['escape' => false, 'title' => __d('Qobo/Notes', 'Add'), 'class' => 'btn btn-default']
             ); ?>
             </div>
         </div>

@@ -39,7 +39,7 @@ echo $this->Html->scriptBlock(
 <section class="content-header">
     <div class="row">
         <div class="col-xs-12 col-md-6">
-            <h4><?= __('Edit {0}', ['Note']) ?></h4>
+            <h4><?= __d('Qobo/Notes', 'Edit {0}', ['Note']) ?></h4>
         </div>
     </div>
 </section>
@@ -95,7 +95,7 @@ echo $this->Html->scriptBlock(
                 </div>
                 <div class="box-footer">
                     <?= $this->Form->button(
-                        '<i class="fa fa-' . $shared[$note->shared]['icon'] . '"></i> ' . __('Submit'),
+                        '<i class="fa fa-' . $shared[$note->shared]['icon'] . '"></i> ' . __d('Qobo/Notes', 'Submit'),
                         ['class' => 'btn btn-' . $note->type, 'id' => 'add-new-note']
                     ); ?>
                 </div>
