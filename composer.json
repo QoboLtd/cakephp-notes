@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "qobo/cakephp-utils": "^13.0"
+        "muffin/trash": "^2.1"
     },
     "require-dev": {
         "qobo/cakephp-composer-dev": "^v1.0"
