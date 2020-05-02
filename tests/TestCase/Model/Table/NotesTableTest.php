@@ -24,8 +24,8 @@ class NotesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.notes.notes',
-        'plugin.notes.users',
+        'plugin.Notes.Notes',
+        'plugin.Notes.Users',
     ];
 
     /**

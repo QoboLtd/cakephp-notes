@@ -19,8 +19,8 @@ class NotesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.notes.notes',
-        'plugin.notes.users',
+        'plugin.Notes.Notes',
+        'plugin.Notes.Users',
     ];
 
     public function setUp()
