@@ -96,30 +96,30 @@ class NotesTable extends Table
     {
         $validator
             ->uuid('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->requirePresence('type', 'create')
-            ->notEmpty('type');
+            ->notEmptyString('type');
 
         $validator
             ->requirePresence('user_id', 'create')
-            ->notEmpty('user_id');
+            ->notEmptyString('user_id');
 
         $validator
-            ->allowEmpty('related_model');
+            ->allowEmptyString('related_model');
 
         $validator
             ->requirePresence('shared', 'create')
-            ->notEmpty('shared');
+            ->notEmptyString('shared');
 
         $validator
             ->requirePresence('content', 'create')
-            ->notEmpty('content');
+            ->notEmptyString('content');
 
         $validator
             ->uuid('related_id')
-            ->allowEmpty('related_id');
+            ->allowEmptyString('related_id');
 
         return $validator;
     }

@@ -36,11 +36,11 @@ class NotesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Notes') ? [] : ['className' => 'Notes\Model\Table\NotesTable'];
+        $config = TableRegistry::getTableLocator()->exists('Notes') ? [] : ['className' => 'Notes\Model\Table\NotesTable'];
         /**
          * @var \Notes\Model\Table\NotesTable $notes
          */
-        $notes = TableRegistry::get('Notes', $config);
+        $notes = TableRegistry::getTableLocator()->get('Notes', $config);
         $this->Notes = $notes;
     }
 
