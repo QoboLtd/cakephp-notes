@@ -3,7 +3,6 @@ namespace Notes\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
-use Notes\Model\Table\NotesTable;
 
 /**
  * Notes\Model\Table\NotesTable Test Case

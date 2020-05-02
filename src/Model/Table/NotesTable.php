@@ -11,12 +11,9 @@
  */
 namespace Notes\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
-use Cake\Utility\Inflector;
 use Cake\Validation\Validator;
-use Notes\Model\Entity\Note;
 
 /**
  * Notes Model
