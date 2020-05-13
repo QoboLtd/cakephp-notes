@@ -11,7 +11,7 @@
  */
 ?>
 <section class="content-header">
-    <h1>Notes
+    <h1><?= __d('Qobo/Notes', 'Notes')?>
         <div class="pull-right">
             <div class="btn-group btn-group-sm" role="group">
             <?= $this->Html->link(
