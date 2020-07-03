@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-12-09 12:46+0000\n"
+"POT-Creation-Date: 2020-05-13 21:10+0300\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,42 +14,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: Controller/NotesController.php:88;133
 msgid "The note has been saved."
 msgstr ""
 
+#: Controller/NotesController.php:97;136
 msgid "The note could not be saved. Please, try again."
 msgstr ""
 
+#: Controller/NotesController.php:168
 msgid "The note has been deleted."
 msgstr ""
 
+#: Controller/NotesController.php:170
 msgid "The note could not be deleted. Please, try again."
 msgstr ""
 
+#: Template/Cell/Notes/form.ctp:16
 msgid "Create Note"
 msgstr ""
 
+#: Template/Cell/Notes/form.ctp:57
+#: Template/Notes/add.ctp:93
+#: Template/Notes/edit.ctp:93
+msgid "Message:"
+msgstr ""
+
+#: Template/Cell/Notes/form.ctp:62
+#: Template/Common/index.ctp:18;20
 msgid "Add"
 msgstr ""
 
+#: Template/Common/index.ctp:14
+msgid "Notes"
+msgstr ""
+
+#: Template/Element/Notes/boxes.ctp:48
 msgid "Edit"
 msgstr ""
 
+#: Template/Element/Notes/boxes.ctp:57
 msgid "Are you sure you want to delete # {0}?"
 msgstr ""
 
+#: Template/Element/Notes/boxes.ctp:58
 msgid "Delete"
 msgstr ""
 
+#: Template/Element/Notes/boxes.ctp:113
 msgid "Last modified"
 msgstr ""
 
+#: Template/Notes/add.ctp:42
 msgid "Create {0}"
 msgstr ""
 
+#: Template/Notes/add.ctp:97
+#: Template/Notes/edit.ctp:98
 msgid "Submit"
 msgstr ""
 
+#: Template/Notes/edit.ctp:42
 msgid "Edit {0}"
 msgstr ""
 

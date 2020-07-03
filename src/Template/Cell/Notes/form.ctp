@@ -54,7 +54,7 @@
             'class' => 'input-sm',
             'label' => false,
             'required' => true,
-            'placeholder' => 'Message:'
+            'placeholder' => __d('Qobo/Notes', 'Message:')
         ]); ?>
     </div>
     <div class="box-footer">
