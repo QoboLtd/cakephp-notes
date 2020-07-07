@@ -3,7 +3,6 @@ namespace Notes\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
-use Notes\Model\Table\NotesTable;
 
 /**
  * Notes\Model\Table\NotesTable Test Case
@@ -24,8 +23,8 @@ class NotesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.notes.notes',
-        'plugin.notes.users',
+        'plugin.Notes.Notes',
+        'plugin.Notes.Users',
     ];
 
     /**
@@ -36,11 +35,11 @@ class NotesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Notes') ? [] : ['className' => 'Notes\Model\Table\NotesTable'];
+        $config = TableRegistry::getTableLocator()->exists('Notes') ? [] : ['className' => 'Notes\Model\Table\NotesTable'];
         /**
          * @var \Notes\Model\Table\NotesTable $notes
          */
-        $notes = TableRegistry::get('Notes', $config);
+        $notes = TableRegistry::getTableLocator()->get('Notes', $config);
         $this->Notes = $notes;
     }
 

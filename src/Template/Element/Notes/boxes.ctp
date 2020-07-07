@@ -69,7 +69,7 @@ if ($inPluginView) {
                 $relatedLink = [];
                 if ($note->has('related_model') && $note->has('related_id')) {
                     try {
-                        $relatedTable = TableRegistry::get($note->related_model);
+                        $relatedTable = TableRegistry::getTableLocator()->get($note->related_model);
 
                         $moduleName = Inflector::humanize(Inflector::underscore($relatedTable->getAlias()));
 

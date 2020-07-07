@@ -12,7 +12,6 @@
 namespace Notes\Controller;
 
 use Cake\Http\Exception\UnauthorizedException;
-use Notes\Controller\AppController;
 
 /**
  * Notes Controller

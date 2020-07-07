@@ -3,15 +3,17 @@ namespace Notes\Test\TestCase\Controller;
 
 use Cake\Http\Response;
 use Cake\ORM\TableRegistry;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * Notes\Controller\NotesController Test Case
  *
  * @property \Notes\Model\Table\NotesTable $NotesTable
  */
-class NotesControllerTest extends IntegrationTestCase
+class NotesControllerTest extends TestCase
 {
+    use IntegrationTestTrait;
 
     /**
      * Fixtures
@@ -19,8 +21,8 @@ class NotesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.notes.notes',
-        'plugin.notes.users',
+        'plugin.Notes.Notes',
+        'plugin.Notes.Users',
     ];
 
     public function setUp()
@@ -40,7 +42,7 @@ class NotesControllerTest extends IntegrationTestCase
         /**
          * @var \Notes\Model\Table\NotesTable $table
          */
-        $table = TableRegistry::get('Notes.Notes');
+        $table = TableRegistry::getTableLocator()->get('Notes.Notes');
         $this->NotesTable = $table;
     }
 
