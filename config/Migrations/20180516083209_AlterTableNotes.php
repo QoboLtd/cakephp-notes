@@ -12,7 +12,9 @@ class AlterTableNotes extends AbstractMigration
      */
     public function change()
     {
-        $this->table('notes')
-            ->rename('qobo_notes');
+        $this
+            ->table('notes')
+            ->rename('qobo_notes')
+            ->save();
     }
 }
